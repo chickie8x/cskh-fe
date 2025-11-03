@@ -150,6 +150,7 @@
   "LOW": "Thấp",
   "MEDIUM": "Trung bình",
   "HIGH": "Cao",
+  "notPermissionDeleteTicket": "Không có quyền xóa ticket",
 
   "_COMMENT_NOTIFICATION": "NOTIFICATION VIEW",
   "carrierRequired": "Đối tác không được để trống",

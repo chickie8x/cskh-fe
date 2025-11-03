@@ -29,6 +29,9 @@ import { getNotifications } from '@/api/notification'
 import { SSE_URL } from '@/utils/config'
 import { toast } from 'vue-sonner'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -49,6 +52,7 @@ let sseClose = null
 watch(
   user,
   (newUser) => {
+    console.log(newUser)
     if (newUser?.id && !sseClose) {
       // Initialize SSE connection when user is available
       const { data, close } = useEventSource(`${SSE_URL}/${newUser.id}`, [], {
@@ -84,14 +88,16 @@ watch(
 
 onMounted(async () => {
   const token = authStore.getAccessToken
-  if (!token && !authStore.getRefreshRun) {
+  if (!token) {
     console.log('app run')
     try {
-      authStore.setRefreshRun(true)
-      const res = await api.get('/auth/refresh', { withCredentials: true })
-      authStore.setAccessToken(res.data.token)
+      const res = await api.post('/auth/refresh', {
+        refreshToken: authStore.getRefreshToken,
+      })
+      authStore.setTokens(res.data.token, res.data.refreshToken)
     } catch (error) {
       console.log(error)
+      router.push('/login')
     }
   }
   // Initialize and fetch notifications

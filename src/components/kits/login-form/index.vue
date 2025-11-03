@@ -137,7 +137,7 @@ async function onSubmit() {
   try {
     const res = await login(form.email, form.password)
     if (res.success) {
-      authStore.setAccessToken(res.token)
+      authStore.setTokens(res.data.token, res.data.refreshToken)
       router.push('/')
     }
   } catch (error) {

@@ -75,11 +75,12 @@
             <DropdownMenuTrigger>
               <Button
                 variant="ghost"
-                class="relative select-none focus:bg-accent active:bg-accent/80"
+                class="relative select-none focus:bg-accent active:bg-accent/80 flex items-center gap-2"
               >
                 <User
                   class="size-5 opacity-50 hover:opacity-100 hover:border border-border rounded-full shadow-sm cursor-pointer"
                 />
+                {{ user?.name || '' }}
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>

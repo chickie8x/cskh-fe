@@ -53,17 +53,21 @@ const authStore = useAuthStore()
 const router = useRouter()
 
 onMounted(async () => {
-  if (authStore.getAccessToken) {
-    router.push('/')
-  } else {
+  if (!authStore.getAccessToken) {
     try {
-      const res = await api.get('/auth/refresh', { withCredentials: true })
-      console.log(res.data.token)
-      authStore.setAccessToken(res.data.token)
+      const res = await api.post('/auth/refresh', {
+        refreshToken: authStore.getRefreshToken,
+      })
+      console.log(res.data)
+      authStore.setTokens(res.data.token, res.data.refreshToken)
+      console.log(authStore.$state)
       router.push('/')
     } catch (error) {
       console.log(error)
     }
+  }
+  else{
+    router.push('/')
   }
 })
 </script>

@@ -4,7 +4,7 @@ import { useAuthStore } from '@/stores/auth'
 const authStore = () => useAuthStore()
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://14.225.1.34/api',
   withCredentials: true, // include cookies
   timeout: 3000,
 })
@@ -20,17 +20,22 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   async (error) => {
-    if (error.response?.status === 401 && !error.config._retry) {
+    if (error.response?.status === 401 && !error.config._retry && authStore().getRefreshToken) {
       error.config._retry = true
       try {
-        const res = await axios.get('/auth/refresh', { withCredentials: true })
+        const res = await api.post('http://14.225.1.34/api/auth/refresh',{
+          refreshToken: authStore().getRefreshToken
+        })
+        console.log(res.data)
         if (res.data.success) {
-          authStore().setAccessToken(res.data.token)
+          authStore().setTokens(res.data.token, res.data.refreshToken)
+          console.log(res.data.token)
           error.config.headers.Authorization = `Bearer ${res.data.token}`
           return api(error.config)
         }
       } catch (refreshError) {
         console.error('Token refresh failed')
+        window.location.href = '/login'
       }
     }
     return Promise.reject(error)

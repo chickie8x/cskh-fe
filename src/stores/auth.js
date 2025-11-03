@@ -4,7 +4,7 @@ import { jwtDecode } from 'jwt-decode'
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     accessToken: null,
-    refreshRun: false,
+    refreshToken: null,
     user: null,
   }),
 
@@ -19,26 +19,26 @@ export const useAuthStore = defineStore('auth', {
       }
     },
 
-    setAccessToken(token) {
-      if (token) {
-        this.accessToken = token
-        this.user = this.decodeToken(token)
+    setTokens(tk, rt) {
+      if (tk) {
+        this.accessToken = tk
+        this.user = this.decodeToken(tk)
+      }
+      if (rt) {
+        this.refreshToken = rt
       }
     },
 
-    clearAccessToken() {
+    clearTokens() {
       this.accessToken = null
+      this.refreshToken = null
       this.user = null
-    },
-
-    setRefreshRun(run) {
-      this.refreshRun = run
     },
   },
 
   getters: {
     getAccessToken: (state) => state.accessToken,
-    getRefreshRun: (state) => state.refreshRun,
+    getRefreshToken: (state) => state.refreshToken,
     getUser: (state) => state.user,
   },
 })

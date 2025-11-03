@@ -113,8 +113,45 @@
       </Card>
     </div>
     <div class="mt-4">
-      <Table :tbHeader="TICKET_TABLE_HEADER" :data="tickets" :styling="tableStyling" />
+      <Table :tbHeader="TICKET_TABLE_HEADER" :data="tickets" :styling="tableStyling" @actionEdit="handleEdit" @actionDelete="handleDelete"/>
     </div>
+    <Dialog
+      :open="open"
+      @close="open = false"
+      title="Ticket"
+      description="Chi tiết ticket"
+      :btnSubmitShow="false"
+      cancelText="close"
+    >
+      <template #content>
+        <div class="text-sm">
+          <div class="flex items-center justify-between p-4 border-b border-border">
+            <span>Ngày tạo</span>
+            <span class="font-semibold">{{ formatDateTime(selectedTicket.createdAt) }}</span>
+          </div>
+          <div class="flex items-center justify-between p-4 border-b border-border">
+            <span>SLA</span>
+            <span class="font-semibold">{{ formatDateTime(selectedTicket.slaDueAt) }}</span>
+          </div>
+          <div class="flex items-center justify-between p-4 border-b border-border">
+            <span>Mức độ ưu tiên</span>
+            <span class="font-semibold">{{ selectedTicket.priority }}</span>
+          </div>
+          <div class="flex items-center justify-between p-4 border-b border-border">
+            <span>Khách hàng</span>
+            <span class="font-semibold">{{ selectedTicket.ticketUser.name }}</span>
+          </div>
+          <div class="flex flex-col p-4 border-b border-border">
+            <span>Vận đơn</span>
+            <span class="font-semibold" v-for="item in selectedTicket.ticketItems" :key="item.id">{{ item.waybill }}({{ item.carrier }}),  </span>
+          </div>
+          <div v-if="selectedTicket.status" class="flex items-center justify-between p-4 border-b border-border">
+            <span>Trạng thái {{ selectedTicket.status }}</span>
+            <span>{{ t(BADGE_STATUS.find((item) => item.value === selectedTicket.status).label) }}</span>
+          </div>
+      </div>
+      </template>
+    </Dialog>
   </div>
 </template>
 
@@ -125,6 +162,7 @@ import { Button } from '@/components/ui/button'
 import { PlusIcon, XIcon, Info, Search, CircleCheck, RefreshCw } from 'lucide-vue-next'
 import Table from '@/components/kits/table/index.vue'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import Dialog from '@/components/kits/dialog/index.vue'
 import {
   Select,
   SelectContent,
@@ -142,9 +180,11 @@ import {
 import api from '@/api/axios'
 import { formatDateTime } from '@/utils/format'
 import MissingOrder from '@/components/kits/missingOrder/index.vue'
+import { toast } from 'vue-sonner'
 
 const { t } = useI18n()
 const tickets = ref([])
+const selectedTicket = ref(null)
 const showCreateTicket = ref(false)
 const selectTicketCategory = ref(null)
 const orderNumbers = ref('')
@@ -152,6 +192,7 @@ const ticketNote = ref('')
 const searchOrders = ref([])
 const missingOrders = ref([])
 const selectedOrders = ref([])
+const open = ref(false)
 const generalInfo = [
   {
     key: 'openTicket',
@@ -223,6 +264,15 @@ const tableStyling = {
       return t(BADGE_PRIORITY.find((item) => item.value === col.priority).label)
     },
   },
+  ticketUser: {
+    colName: 'ticketUser',
+    classFn: (col) => {
+      return ''
+    },
+    valueFn: (col) => {
+      return col.ticketUser.name
+    },
+  },
 }
 
 const fetchTickets = async () => {
@@ -272,6 +322,29 @@ const syncOrderCarrier = (order) => {
     missingOrders.value.splice(index, 1)
   }
   searchOrders.value.push(order)
+}
+
+const handleEdit = (ticket) => {
+  selectedTicket.value = ticket
+  console.log(selectedTicket.value)
+  open.value = true
+}
+
+const handleDelete = (ticket) => {
+  toast.warning(t('notPermissionDeleteTicket'))
+}
+
+const handleUpdateTicket = async () => {
+  try {
+    const response = await api.put(`/customer/ticket/${selectedTicket.value.id}`, {
+      status: selectedTicket.value.status,
+    })
+    console.log(response.data)
+    await fetchTickets()
+    open.value = false
+  } catch (error) {
+    console.error('Error updating ticket:', error)
+  }
 }
 
 watch(missingOrders, () => {
