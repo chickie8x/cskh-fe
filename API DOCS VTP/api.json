@@ -1,0 +1,8047 @@
+{
+    swagger: "2.0",
+    info: {
+    description: "Kết nối tất cả",
+    version: "1.0.0",
+    title: "Viettelpost - Tài liệu API",
+    contact: {
+    name: "Nguyễn Trọng Luân",
+    url: "/",
+    email: "luan19@viettelpost.com.vn"
+        },
+    license: {
+    name: "Apache 2.0",
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    host: "partnerdev.viettelpost.vn",
+    basePath: "/v2",
+    tags: [
+        {
+    name: "categories-controller",
+    description: "Categories Controller"
+        },
+        {
+    name: "commerce-2-controller",
+    description: "Commerce 2 Controller"
+        },
+        {
+    name: "core-controller",
+    description: "Core Controller"
+        },
+        {
+    name: "order-controller",
+    description: "Order Controller"
+        },
+        {
+    name: "payments-controller",
+    description: "Payments Controller"
+        },
+        {
+    name: "thu-ho-controller",
+    description: "Thu Ho Controller"
+        },
+        {
+    name: "user-controller",
+    description: "User Controller"
+        }
+    ],
+    paths: {
+    /categories/checkAddressWarning: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "checkAddressWarning",
+    operationId: "checkAddressWarningUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "wardId",
+    in: "query",
+    description: "wardId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/districtByIdAndProvince: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getDistrictByIdAndProvince",
+    operationId: "getDistrictByIdAndProvinceUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "districtId",
+    in: "query",
+    description: "districtId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    },
+                    {
+    name: "provinceById",
+    in: "query",
+    description: "provinceById",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listBuuCucVTP: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "listBuuCucVTP",
+    operationId: "listBuuCucVTPUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listDistrict: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getListDistrict",
+    operationId: "getListDistrictUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "provinceId",
+    in: "query",
+    description: "provinceId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listNational: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getListNational",
+    operationId: "getListNationalUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listProvince: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getListProvince",
+    operationId: "getListProvinceUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listProvinceById: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "listProvinceById",
+    operationId: "listProvinceByIdUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "provinceId",
+    in: "query",
+    description: "provinceId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listProvinceNew: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getListProvinceNew",
+    operationId: "getListProvinceNewUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listService: {
+    post: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "listService",
+    operationId: "listServiceUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/DrafForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listServiceExtra: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "listServiceExtra",
+    operationId: "listServiceExtraUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "serviceCode",
+    in: "query",
+    description: "serviceCode",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listWards: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getListWards",
+    operationId: "getListWardsUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "districtId",
+    in: "query",
+    description: "districtId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listWardsInternal: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getListWardsInternal",
+    operationId: "getListWardsInternalUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "districtId",
+    in: "query",
+    description: "districtId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/listWardsNew: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getListWardsNew",
+    operationId: "getListWardsNewUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "provinceId",
+    in: "query",
+    description: "provinceId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/nationalById: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getNationalById",
+    operationId: "getNationalByIdUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "nationalId",
+    in: "query",
+    description: "nationalId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/provinceById: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getProvinceById",
+    operationId: "getProvinceByIdUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "provinceById",
+    in: "query",
+    description: "provinceById",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /categories/wardByDistrictAndId: {
+    get: {
+    tags: [
+                    "categories-controller"
+                ],
+    summary: "getWardsByDistrictAndId",
+    operationId: "getWardsByDistrictAndIdUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "districtId",
+    in: "query",
+    description: "districtId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    },
+                    {
+    name: "wardsId",
+    in: "query",
+    description: "wardsId",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/complaint-detail: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "complaintDetail",
+    operationId: "complaintDetailUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "complaint",
+    in: "query",
+    description: "complaint",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/create-complaint: {
+    post: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "createComplaint",
+    operationId: "createComplaintUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "body",
+    description: "body",
+    required: true,
+    schema: {
+    type: "object",
+    additionalProperties: {
+    type: "object"
+                            }
+                        }
+                    },
+                    {
+    name: "month",
+    in: "query",
+    description: "month",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/create-token: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "createToken",
+    operationId: "createTokenUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "token",
+    in: "query",
+    description: "token",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/list-bill-vtp: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "listBillVTPay",
+    operationId: "listBillVTPayUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "fromDate",
+    in: "query",
+    description: "fromDate",
+    required: true,
+    type: "string",
+    format: "date-time"
+                    },
+                    {
+    name: "toDate",
+    in: "query",
+    description: "toDate",
+    required: true,
+    type: "string",
+    format: "date-time"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/list-complaint: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "listComplaint",
+    operationId: "listComplaintUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "month",
+    in: "query",
+    description: "month",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/list-payments/{start
+        }/{end
+        }: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "listPayments",
+    operationId: "listPaymentsUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "end",
+    in: "path",
+    description: "end",
+    required: true,
+    type: "string",
+    format: "date-time"
+                    },
+                    {
+    name: "start",
+    in: "path",
+    description: "start",
+    required: true,
+    type: "string",
+    format: "date-time"
+                    },
+                    {
+    name: "status",
+    in: "query",
+    description: "status",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/off/assign-group-bill: {
+    post: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "assignGroupBill",
+    operationId: "assignGroupBillUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "body",
+    description: "body",
+    required: true,
+    schema: {
+    type: "object",
+    additionalProperties: {
+    type: "object"
+                            }
+                        }
+                    },
+                    {
+    name: "os",
+    in: "query",
+    description: "os",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/off/create-group-bill: {
+    post: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "createGroupBill",
+    operationId: "createGroupBillUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "body",
+    description: "body",
+    required: true,
+    schema: {
+    type: "object",
+    additionalProperties: {
+    type: "object"
+                            }
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/off/list-group-bill: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "listGroupBill",
+    operationId: "listGroupBillUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/off/list-group-bill-detail: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "listGroupBillDetail",
+    operationId: "listGroupBillDetailUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "group",
+    in: "query",
+    description: "group",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/off/remove-bill: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "listGroupBillDetail",
+    operationId: "listGroupBillDetailUsingGET_1",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "bill",
+    in: "query",
+    description: "bill",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    },
+                    {
+    name: "group",
+    in: "query",
+    description: "group",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/orders/query: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "queryOrder",
+    operationId: "queryOrderUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "code",
+    in: "query",
+    description: "code",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/orders/query-customer: {
+    get: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "queryCustomer",
+    operationId: "queryCustomerUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "code",
+    in: "query",
+    description: "code",
+    required: true,
+    type: "string"
+                    },
+                    {
+    name: "order",
+    in: "query",
+    description: "order",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /core/orders/save: {
+    post: {
+    tags: [
+                    "core-controller"
+                ],
+    summary: "saveOrder",
+    operationId: "saveOrderUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "edit",
+    in: "query",
+    description: "edit",
+    required: true,
+    type: "boolean"
+                    },
+                    {
+    in: "body",
+    name: "order",
+    description: "order",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderSaveForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/CreateOrder-Shopee: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createOrderShopee",
+    operationId: "createOrderShopeeUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "request",
+    description: "request",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderShopeeRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/UpdateOrder: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "updateOrder",
+    operationId: "updateOrderUsingPOST_1",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/UpdateOrderForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/UpdateOrder-encrypt: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "updateOrder",
+    operationId: "updateOrderUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "dataEncrypt",
+    description: "dataEncrypt",
+    required: true,
+    schema: {
+    $ref: "#/definitions/ACBRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/address/admin/active: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "addressNewActive",
+    operationId: "addressNewActiveUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "isActive",
+    in: "query",
+    description: "isActive",
+    required: true,
+    type: "boolean"
+                    },
+                    {
+    name: "phoneOrEmail",
+    in: "query",
+    description: "phoneOrEmail",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/address/admin/get: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getAddressNewActive",
+    operationId: "getAddressNewActiveUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "phoneOrEmail",
+    in: "query",
+    description: "phoneOrEmail",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/block-attribute/admin/create/{phoneOrEmail
+        }: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createBlockAttribute",
+    operationId: "createBlockAttributeUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "blockAttribute",
+    description: "blockAttribute",
+    required: true,
+    schema: {
+    $ref: "#/definitions/BlockAttribute"
+                        }
+                    },
+                    {
+    name: "phoneOrEmail",
+    in: "path",
+    description: "phoneOrEmail",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/block-attribute/admin/get/{phoneOrEmail
+        }: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getBlockAttribute",
+    operationId: "getBlockAttributeUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "phoneOrEmail",
+    in: "path",
+    description: "phoneOrEmail",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/block-attribute/admin/update/{phoneOrEmail
+        }: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "updateBlockAttribute",
+    operationId: "updateBlockAttributeUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "blockAttribute",
+    description: "blockAttribute",
+    required: true,
+    schema: {
+    $ref: "#/definitions/BlockAttribute"
+                        }
+                    },
+                    {
+    name: "phoneOrEmail",
+    in: "path",
+    description: "phoneOrEmail",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/cache/admin/clear: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "clearCacheRedis",
+    operationId: "clearCacheRedisUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "pattern",
+    description: "pattern",
+    required: true,
+    schema: {
+    type: "object",
+    additionalProperties: {
+    type: "string"
+                            }
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/cancelOrder-Shopee: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "cancelOrderShopee",
+    operationId: "cancelOrderShopeeUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "request",
+    description: "request",
+    required: true,
+    schema: {
+    $ref: "#/definitions/CancelOrderShopeeRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/checkEditOrderInfo: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "checkEditOrderInfo",
+    operationId: "checkEditOrderInfoUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "checkEditOrderInfoRequest",
+    description: "checkEditOrderInfoRequest",
+    required: true,
+    schema: {
+    $ref: "#/definitions/CheckEditOrderInfoRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResData«CheckEditOrderInfoResponse»"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/checkWallet: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "checkWallet",
+    operationId: "checkWalletUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "orderNumber",
+    in: "query",
+    description: "orderNumber",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/create-order-vip: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createOrderSenDo",
+    operationId: "createOrderSenDoUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderInfo"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/create-order-vip-12: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createOrderv12",
+    operationId: "createOrderv12UsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OldOrderForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/createOrder: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createOrder",
+    operationId: "createOrderUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderInfo"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/createOrder-dvc-external: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createOrderDVCExternal",
+    operationId: "createOrderDVCExternalUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderDVC"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/createOrderNLP: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createOrderNLP",
+    operationId: "createOrderNLPUsingPOST_1",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderAIForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/createOrderNLP-encrypt: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createOrderNLP",
+    operationId: "createOrderNLPUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "dataEncrypt",
+    description: "dataEncrypt",
+    required: true,
+    schema: {
+    $ref: "#/definitions/ACBRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/createQuestion: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createQuestion",
+    operationId: "createQuestionUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/PartnerQuestionCommon"
+                        }
+                    },
+                    {
+    name: "secret-id",
+    in: "header",
+    description: "secret-id",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    type: "object"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/deleteQuestion/{id
+        }: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "deleteQuestion",
+    operationId: "deleteQuestionUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "id",
+    in: "path",
+    description: "id",
+    required: true,
+    type: "string"
+                    },
+                    {
+    name: "secret-id",
+    in: "header",
+    description: "secret-id",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    type: "object"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/detail: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getOrderDetail",
+    operationId: "getOrderDetailUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "oid",
+    in: "query",
+    description: "oid",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/detail-v2: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getOrderDetailV2",
+    operationId: "getOrderDetailV2UsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "o",
+    in: "query",
+    description: "o",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/edit: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "editOrder",
+    operationId: "editOrderUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderInfo"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/editOrderInfoV2: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "editOrderInfoV2",
+    operationId: "editOrderInfoV2UsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "editOrderRequest",
+    description: "editOrderRequest",
+    required: true,
+    schema: {
+    $ref: "#/definitions/EditOrderRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResData«boolean»"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/encryptLinkPrint: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "encryptLinkPrint",
+    operationId: "encryptLinkPrintUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/PrintForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/getOrderDetailV3: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getOrderDetailV3",
+    operationId: "getOrderDetailV3UsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "OrderNumber",
+    in: "query",
+    description: "OrderNumber",
+    required: true,
+    type: "string"
+                    },
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/getPrice: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getPrice",
+    operationId: "getPriceUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderInfo"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/getPrice-dvc-external: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getPriceDvcExternal",
+    operationId: "getPriceDvcExternalUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderPriceDVC"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/getPriceAll: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getPriceAll",
+    operationId: "getPriceAllUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderInfo"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/getPriceAllNlp: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getPriceAllNlp",
+    operationId: "getPriceAllNlpUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderInfo"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/getPriceEditInfo: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getPriceEditInfo",
+    operationId: "getPriceEditInfoUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderEditForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/getPriceNlp: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getPriceNlp",
+    operationId: "getPriceNlpUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderInfo"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/getVerificationCode/{orderNumber
+        }: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getVerificationCode",
+    operationId: "getVerificationCodeUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "orderNumber",
+    in: "path",
+    description: "orderNumber",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/historyEditOrderInfo: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "historyEditOrderInfo",
+    operationId: "historyEditOrderInfoUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/HistoryEditOrderInfoRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResData«List«HistoryEditOrderInfoResponse»»"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/insertVerificationCode/{orderNumber
+        }: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "insertVerificationCode",
+    operationId: "insertVerificationCodeUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "orderNumber",
+    in: "path",
+    description: "orderNumber",
+    required: true,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "verificationCode",
+    description: "verificationCode",
+    required: true,
+    schema: {
+    $ref: "#/definitions/VerificationCode"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/listQuestion: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "listQuestion",
+    operationId: "listQuestionUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "category",
+    in: "query",
+    description: "category",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "page",
+    in: "query",
+    description: "page",
+    required: false,
+    type: "integer",
+    default: 0,
+    format: "int32"
+                    },
+                    {
+    name: "size",
+    in: "query",
+    description: "size",
+    required: false,
+    type: "integer",
+    default: 10,
+    format: "int32"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    type: "object"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/log/admin/countPartnerAddressNew: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getPartnerCountAddressNew",
+    operationId: "getPartnerCountAddressNewUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "pageIndex",
+    in: "query",
+    description: "pageIndex",
+    required: true,
+    type: "integer",
+    format: "int32"
+                    },
+                    {
+    name: "pageSize",
+    in: "query",
+    description: "pageSize",
+    required: true,
+    type: "integer",
+    format: "int32"
+                    },
+                    {
+    name: "partnerId",
+    in: "query",
+    description: "partnerId",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/log/admin/order: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getLogOrder",
+    operationId: "getLogOrderUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "orderNumber",
+    in: "query",
+    description: "orderNumber",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/order-filter: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "listOrderPartner",
+    operationId: "listOrderPartnerUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "orderFilter",
+    description: "orderFilter",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderFilterForm"
+                        }
+                    },
+                    {
+    name: "page",
+    in: "query",
+    description: "page",
+    required: true,
+    type: "integer",
+    format: "int32"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/order-filter-count: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "countOrderPartner",
+    operationId: "countOrderPartnerUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "orderFilter",
+    description: "orderFilter",
+    required: true,
+    schema: {
+    $ref: "#/definitions/OrderFilterForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/order-payment: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getOrderPayment",
+    operationId: "getOrderPaymentUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "bill",
+    in: "query",
+    description: "bill",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/printing-code: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createPrintCode",
+    operationId: "createPrintCodeUsingPOST_1",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/PrintFormV2"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/printing-code-encrypt: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "createPrintCode",
+    operationId: "createPrintCodeUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "dataEncrypt",
+    description: "dataEncrypt",
+    required: true,
+    schema: {
+    $ref: "#/definitions/ACBRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/pushOrderStatusFailure-file: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "pushOrderStatusFailureWithFile",
+    operationId: "pushOrderStatusFailureWithFileUsingPOST",
+    consumes: [
+                    "multipart/form-data"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "file",
+    in: "formData",
+    description: "file",
+    required: true,
+    type: "file"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    type: "object"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/pushOrderStatusFailure-json: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "pushOrderStatusFailureWithJson",
+    operationId: "pushOrderStatusFailureWithJsonUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "orderStatusData",
+    description: "orderStatusData",
+    required: true,
+    schema: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/OrderStatusData"
+                            }
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    type: "object"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/regex-phone/admin/active: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "activeRegexPhone",
+    operationId: "activeRegexPhoneUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "isActive",
+    in: "query",
+    description: "isActive",
+    required: true,
+    type: "boolean"
+                    },
+                    {
+    name: "phoneOrEmail",
+    in: "query",
+    description: "phoneOrEmail",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/regex-phone/admin/get: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "getRegexPhone",
+    operationId: "getRegexPhoneUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "phoneOrEmail",
+    in: "query",
+    description: "phoneOrEmail",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/registerOrderHook: {
+    get: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "registerOrderHook",
+    operationId: "registerOrderHookUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "mes",
+    in: "query",
+    description: "mes",
+    required: true,
+    type: "string"
+                    },
+                    {
+    name: "oid",
+    in: "query",
+    description: "oid",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            },
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "registerOrderHook",
+    operationId: "registerOrderHookUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/A71UpdateForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/send/mail: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "sendMail",
+    operationId: "sendMailUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "data",
+    description: "data",
+    required: true,
+    schema: {
+    $ref: "#/definitions/EmailRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    type: "object"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/updateQuestion: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "updateQuestion",
+    operationId: "updateQuestionUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/PartnerQuestionCommon"
+                        }
+                    },
+                    {
+    name: "secret-id",
+    in: "header",
+    description: "secret-id",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    type: "object"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /order/webhook/receive: {
+    post: {
+    tags: [
+                    "order-controller"
+                ],
+    summary: "webhook",
+    operationId: "webhookUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "data",
+    description: "data",
+    required: true,
+    schema: {
+    $ref: "#/definitions/WebhookData"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    type: "object"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /orders2/create: {
+    post: {
+    tags: [
+                    "commerce-2-controller"
+                ],
+    summary: "create",
+    operationId: "createUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/B2COrderForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /orders2/price: {
+    post: {
+    tags: [
+                    "commerce-2-controller"
+                ],
+    summary: "price",
+    operationId: "priceUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/B2CRequestPriceForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /payments/make: {
+    post: {
+    tags: [
+                    "payments-controller"
+                ],
+    summary: "make",
+    operationId: "makeUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "makePaymentForm",
+    description: "makePaymentForm",
+    required: true,
+    schema: {
+    $ref: "#/definitions/MakePaymentForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /payments/query: {
+    get: {
+    tags: [
+                    "payments-controller"
+                ],
+    summary: "query",
+    operationId: "queryUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "key",
+    in: "query",
+    description: "key",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /thuho/verify: {
+    post: {
+    tags: [
+                    "thu-ho-controller"
+                ],
+    summary: "price",
+    operationId: "priceUsingPOST_1",
+    consumes: [
+                    "application/x-www-form-urlencoded"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "check_sum",
+    in: "formData",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "merchant_code",
+    in: "formData",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "null",
+    in: "formData",
+    required: false,
+    type: "boolean"
+                    },
+                    {
+    name: "order_id",
+    in: "formData",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "trans_amount",
+    in: "formData",
+    required: false,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    type: "object",
+    additionalProperties: {
+    type: "string"
+                            }
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/change-password: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "changePassword",
+    operationId: "changePasswordUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "changePasswordForm",
+    description: "changePasswordForm",
+    required: true,
+    schema: {
+    $ref: "#/definitions/ChangePasswordForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/connect-via-otp: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "loginOtp",
+    operationId: "loginOtpUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "loginOtpForm",
+    description: "loginOtpForm",
+    required: true,
+    schema: {
+    $ref: "#/definitions/LoginOtpForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/create-captcha: {
+    get: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "createCaptcha",
+    operationId: "createCaptchaUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "key",
+    in: "query",
+    description: "key",
+    required: true,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/danh-sach-dich-vu-dac-biet: {
+    get: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "listResiteredService",
+    operationId: "listResiteredServiceUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/info: {
+    get: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "getUserInfo",
+    operationId: "getUserInfoUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/info-detail: {
+    get: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "getDetailUser",
+    operationId: "getDetailUserUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/list-inventory: {
+    get: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "getListInventory",
+    operationId: "getListInventoryUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/listInventory: {
+    get: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "listInventory",
+    operationId: "listInventoryUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/login: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "login",
+    operationId: "loginUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "loginForm",
+    description: "loginForm",
+    required: true,
+    schema: {
+    $ref: "#/definitions/LoginForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/login-from-web: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "loginFromWeb",
+    operationId: "loginFromWebUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "loginForm",
+    description: "loginForm",
+    required: true,
+    schema: {
+    $ref: "#/definitions/LoginFromWebRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/login-with-sso: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "loginWithSSO",
+    operationId: "loginWithSSOUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "dataEncrypt",
+    description: "dataEncrypt",
+    required: true,
+    schema: {
+    $ref: "#/definitions/VipoEncrypt"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/loginVTP: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "loginVTP",
+    operationId: "loginVTPUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "loginVTPForm",
+    description: "loginVTPForm",
+    required: true,
+    schema: {
+    $ref: "#/definitions/LoginVTPForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/make-client-otp: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "makeClientOtp",
+    operationId: "makeClientOtpUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "makeOtpForm",
+    description: "makeOtpForm",
+    required: true,
+    schema: {
+    $ref: "#/definitions/MakeOtpForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/ownerConnect: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "ownerConnect",
+    operationId: "ownerConnectUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "loginForm",
+    description: "loginForm",
+    required: true,
+    schema: {
+    $ref: "#/definitions/LoginForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/ownerRegister: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "ownerRegister",
+    operationId: "ownerRegisterUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/RegisterForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/register-v2: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "ownerRegisterV2",
+    operationId: "ownerRegisterV2UsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/RegisterForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/registerInventory: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "registerInventory",
+    operationId: "registerInventoryUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "form",
+    description: "form",
+    required: true,
+    schema: {
+    $ref: "#/definitions/RegisterForm"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/registerOrderPrefix: {
+    get: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "registerOrderPrefix",
+    operationId: "registerOrderPrefixUsingGET",
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    name: "px",
+    in: "query",
+    description: "px",
+    required: true,
+    type: "string"
+                    },
+                    {
+    name: "tp",
+    in: "query",
+    description: "tp",
+    required: true,
+    type: "integer",
+    format: "int64"
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/update: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "updateUser",
+    operationId: "updateUserUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "updateUserRequest",
+    description: "updateUserRequest",
+    required: true,
+    schema: {
+    $ref: "#/definitions/UpdateUserRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/update-info: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "updateUserInfo",
+    operationId: "updateUserInfoUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "userInfo2",
+    description: "userInfo2",
+    required: true,
+    schema: {
+    $ref: "#/definitions/UserInfo2"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        },
+    /user/updateURL: {
+    post: {
+    tags: [
+                    "user-controller"
+                ],
+    summary: "updateURL",
+    operationId: "updateURLUsingPOST",
+    consumes: [
+                    "application/json"
+                ],
+    produces: [
+                    "*/*"
+                ],
+    parameters: [
+                    {
+    name: "Token",
+    in: "header",
+    description: "Partner token, get from login API",
+    required: false,
+    type: "string"
+                    },
+                    {
+    in: "body",
+    name: "updateUrlRequest",
+    description: "updateUrlRequest",
+    required: true,
+    schema: {
+    $ref: "#/definitions/UpdateUrlRequest"
+                        }
+                    }
+                ],
+    responses: {
+                    200: {
+    description: "OK",
+    schema: {
+    $ref: "#/definitions/ResponseEntity"
+                        }
+                    },
+                    201: {
+    description: "Created"
+                    },
+                    401: {
+    description: "Unauthorized"
+                    },
+                    403: {
+    description: "Forbidden"
+                    },
+                    404: {
+    description: "Not Found"
+                    }
+                },
+    deprecated: false
+            }
+        }
+    },
+    definitions: {
+    A71UpdateForm: {
+    type: "object",
+    properties: {
+    ErrorMessage: {
+    type: "string"
+                },
+    MessageSeq: {
+    type: "string"
+                },
+    NumberCard: {
+    type: "string"
+                }
+            },
+    title: "A71UpdateForm"
+        },
+    ACBEncData: {
+    type: "object",
+    properties: {
+    encData: {
+    type: "string"
+                }
+            },
+    title: "ACBEncData"
+        },
+    ACBRequest: {
+    type: "object",
+    properties: {
+    requestDateTime: {
+    type: "string"
+                },
+    requestParameters: {
+    $ref: "#/definitions/ACBEncData"
+                },
+    requestTrace: {
+    type: "string"
+                }
+            },
+    title: "ACBRequest"
+        },
+    AddressInputForm: {
+    type: "object",
+    properties: {
+    ADDRESS: {
+    type: "string"
+                },
+    DISTRICT_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    FULLADDRESS: {
+    type: "string"
+                },
+    LATITUDE: {
+    type: "string"
+                },
+    LONGITUDE: {
+    type: "string"
+                },
+    NAME: {
+    type: "string"
+                },
+    PHONE: {
+    type: "string"
+                },
+    PROVINCE_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    REQUIRED: {
+    type: "boolean"
+                },
+    WARDS_ID: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "AddressInputForm"
+        },
+    B2COrderForm: {
+    type: "object",
+    properties: {
+    extendServiceCode: {
+    type: "string"
+                },
+    inventoryCode: {
+    type: "string"
+                },
+    listProduct: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/B2cProductForm"
+                    }
+                },
+    moneyColletion: {
+    type: "integer",
+    format: "int64"
+                },
+    orderNote: {
+    type: "string"
+                },
+    orderNumber: {
+    type: "string"
+                },
+    orderPayment: {
+    type: "integer",
+    format: "int64"
+                },
+    productTypeArray: {
+    type: "string"
+                },
+    receiverInfo: {
+    $ref: "#/definitions/CustomerForm"
+                },
+    serviceCode: {
+    type: "string"
+                }
+            },
+    title: "B2COrderForm"
+        },
+    B2CRequestPriceForm: {
+    type: "object",
+    properties: {
+    address: {
+    type: "string"
+                },
+    districtId: {
+    type: "integer",
+    format: "int64"
+                },
+    listProductType: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/ProductForm"
+                    }
+                },
+    moneyCollection: {
+    type: "integer",
+    format: "int64"
+                },
+    provinceId: {
+    type: "integer",
+    format: "int64"
+                },
+    wardsId: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "B2CRequestPriceForm"
+        },
+    B2cProductForm: {
+    type: "object",
+    properties: {
+    height: {
+    type: "integer",
+    format: "int64"
+                },
+    length: {
+    type: "integer",
+    format: "int64"
+                },
+    price: {
+    type: "integer",
+    format: "int64"
+                },
+    productName: {
+    type: "string"
+                },
+    quantity: {
+    type: "integer",
+    format: "int64"
+                },
+    weight: {
+    type: "integer",
+    format: "int64"
+                },
+    width: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "B2cProductForm"
+        },
+    BlockAttribute: {
+    type: "object",
+    properties: {
+    BLOCK_ATTRIBUTE_DETAILS: {
+    $ref: "#/definitions/BlockAttributeDetails"
+                },
+    CREATED_AT: {
+    type: "string",
+    format: "date-time"
+                },
+    IS_ENABLE: {
+    type: "boolean"
+                },
+    PARTNER_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    UPDATED_AT: {
+    type: "string",
+    format: "date-time"
+                }
+            },
+    title: "BlockAttribute"
+        },
+    BlockAttributeDetails: {
+    type: "object",
+    properties: {
+    MONEY_COLLECTION: {
+    $ref: "#/definitions/Operator«long»"
+                },
+    ORDER_PAYMENT: {
+    $ref: "#/definitions/Operator«long»"
+                },
+    ORDER_SERVICE: {
+    $ref: "#/definitions/Operator«string»"
+                },
+    ORDER_SERVICE_ADD: {
+    $ref: "#/definitions/Operator«string»"
+                },
+    ORDER_TYPE: {
+    $ref: "#/definitions/Operator«int»"
+                },
+    ORDER_VOUCHER: {
+    $ref: "#/definitions/Operator«string»"
+                },
+    PRODUCT_HEIGHT: {
+    $ref: "#/definitions/Operator«long»"
+                },
+    PRODUCT_LENGTH: {
+    $ref: "#/definitions/Operator«long»"
+                },
+    PRODUCT_PRICE: {
+    $ref: "#/definitions/Operator«long»"
+                },
+    PRODUCT_QUANTITY: {
+    $ref: "#/definitions/Operator«long»"
+                },
+    PRODUCT_TYPE: {
+    $ref: "#/definitions/Operator«string»"
+                },
+    PRODUCT_WEIGHT: {
+    $ref: "#/definitions/Operator«long»"
+                },
+    PRODUCT_WIDTH: {
+    $ref: "#/definitions/Operator«long»"
+                },
+    TYPE: {
+    $ref: "#/definitions/Operator«long»"
+                }
+            },
+    title: "BlockAttributeDetails"
+        },
+    CancelOrderShopeeRequest: {
+    type: "object",
+    properties: {
+    jwt: {
+    type: "string"
+                }
+            },
+    title: "CancelOrderShopeeRequest"
+        },
+    ChangePasswordForm: {
+    type: "object",
+    properties: {
+    captcha: {
+    type: "string"
+                },
+    captchaKey: {
+    type: "string"
+                },
+    newPassword: {
+    type: "string"
+                },
+    newPasswordReTyp: {
+    type: "string"
+                },
+    oldPassword: {
+    type: "string"
+                }
+            },
+    title: "ChangePasswordForm"
+        },
+    CheckEditOrderInfoRequest: {
+    type: "object",
+    properties: {
+    cusId: {
+    type: "integer",
+    format: "int64"
+                },
+    ip: {
+    type: "string"
+                },
+    orderNumber: {
+    type: "string"
+                }
+            },
+    title: "CheckEditOrderInfoRequest"
+        },
+    CheckEditOrderInfoResponse: {
+    type: "object",
+    properties: {
+    deliveryTime: {
+    type: "integer",
+    format: "int32"
+                },
+    errorOut: {
+    type: "string"
+                },
+    moneyCollection: {
+    type: "integer",
+    format: "int32"
+                },
+    orderNote: {
+    type: "integer",
+    format: "int32"
+                },
+    orderNoteViewChange: {
+    type: "integer",
+    format: "int32"
+                },
+    orderPayment: {
+    type: "integer",
+    format: "int32"
+                },
+    orderService: {
+    type: "integer",
+    format: "int32"
+                },
+    orderServiceAdd: {
+    type: "integer",
+    format: "int32"
+                },
+    productHeight: {
+    type: "integer",
+    format: "int32"
+                },
+    productLength: {
+    type: "integer",
+    format: "int32"
+                },
+    productName: {
+    type: "integer",
+    format: "int32"
+                },
+    productQuantity: {
+    type: "integer",
+    format: "int32"
+                },
+    productWeight: {
+    type: "integer",
+    format: "int32"
+                },
+    productWidth: {
+    type: "integer",
+    format: "int32"
+                },
+    reason: {
+    type: "string"
+                },
+    receiverAddress: {
+    type: "integer",
+    format: "int32"
+                },
+    receiverFullname: {
+    type: "integer",
+    format: "int32"
+                },
+    receiverPhone: {
+    type: "integer",
+    format: "int32"
+                },
+    senderAddress: {
+    type: "integer",
+    format: "int32"
+                },
+    senderFullname: {
+    type: "integer",
+    format: "int32"
+                },
+    senderPhone: {
+    type: "integer",
+    format: "int32"
+                }
+            },
+    title: "CheckEditOrderInfoResponse"
+        },
+    CustomerForm: {
+    type: "object",
+    properties: {
+    address: {
+    type: "string"
+                },
+    districtId: {
+    type: "integer",
+    format: "int64"
+                },
+    name: {
+    type: "string"
+                },
+    phone: {
+    type: "string"
+                },
+    provinceId: {
+    type: "integer",
+    format: "int64"
+                },
+    wardsId: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "CustomerForm"
+        },
+    DrafForm: {
+    type: "object",
+    properties: {
+    ACCESS_TOKEN: {
+    type: "string"
+                },
+    ACTION: {
+    type: "integer",
+    format: "int64"
+                },
+    BANKID: {
+    type: "integer",
+    format: "int64"
+                },
+    BANKNUMBER: {
+    type: "string"
+                },
+    BRANCH: {
+    type: "string"
+                },
+    CUS_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    DATE: {
+    type: "string",
+    example: "dd/MM/yyyy"
+                },
+    DATE_FROM: {
+    type: "string",
+    example: "dd/MM/yyyy"
+                },
+    DATE_TO: {
+    type: "string",
+    example: "dd/MM/yyyy"
+                },
+    EMAIL: {
+    type: "string"
+                },
+    GROUPADDRESS_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    LISTPAYMENT_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    LIST_USERID: {
+    type: "array",
+    items: {
+    type: "integer",
+    format: "int64"
+                    }
+                },
+    NOTE: {
+    type: "string"
+                },
+    ORDER_NUMBER: {
+    type: "string"
+                },
+    PAYMENT: {
+    type: "integer",
+    format: "int64"
+                },
+    PAYTYPE: {
+    type: "integer",
+    format: "int64"
+                },
+    PHONE: {
+    type: "string"
+                },
+    RATE: {
+    type: "integer",
+    format: "int64"
+                },
+    RATE_TYPE: {
+    type: "integer",
+    format: "int64"
+                },
+    REPRESENT: {
+    type: "string"
+                },
+    SOURCE: {
+    type: "integer",
+    format: "int32"
+                },
+    TYPE: {
+    type: "integer",
+    format: "int64"
+                },
+    USER_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    USER_NAME: {
+    type: "string"
+                },
+    pRateGroup: {
+    type: "integer",
+    format: "int64"
+                },
+    pTYPE: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "DrafForm"
+        },
+    EditOrderRequest: {
+    type: "object",
+    properties: {
+    addressChanged: {
+    type: "boolean"
+                },
+    cusId: {
+    type: "integer",
+    format: "int64"
+                },
+    deliveryTime: {
+    type: "integer",
+    format: "int32"
+                },
+    ip: {
+    type: "string"
+                },
+    listItem: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/OrderItemForm"
+                    }
+                },
+    moneyCollection: {
+    type: "integer",
+    format: "int64"
+                },
+    orderNote: {
+    type: "string"
+                },
+    orderNumber: {
+    type: "string"
+                },
+    orderPayment: {
+    type: "integer",
+    format: "int64"
+                },
+    orderService: {
+    type: "string"
+                },
+    orderServiceAdd: {
+    type: "string"
+                },
+    orderStatus: {
+    type: "integer",
+    format: "int32"
+                },
+    otpToken: {
+    type: "string"
+                },
+    productHeight: {
+    type: "integer",
+    format: "int64"
+                },
+    productLength: {
+    type: "integer",
+    format: "int64"
+                },
+    productName: {
+    type: "string"
+                },
+    productPrice: {
+    type: "integer",
+    format: "int64"
+                },
+    productQuantity: {
+    type: "integer",
+    format: "int64"
+                },
+    productWeight: {
+    type: "integer",
+    format: "int64"
+                },
+    productWidth: {
+    type: "integer",
+    format: "int64"
+                },
+    receiverAddress: {
+    type: "string"
+                },
+    receiverDistrict: {
+    type: "integer",
+    format: "int64"
+                },
+    receiverFullName: {
+    type: "string"
+                },
+    receiverPhone: {
+    type: "string"
+                },
+    receiverProvince: {
+    type: "integer",
+    format: "int64"
+                },
+    receiverWard: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "EditOrderRequest"
+        },
+    EmailRequest: {
+    type: "object",
+    properties: {
+    async: {
+    type: "boolean"
+                },
+    bcc: {
+    type: "array",
+    items: {
+    type: "string"
+                    }
+                },
+    body: {
+    type: "string"
+                },
+    cc: {
+    type: "array",
+    items: {
+    type: "string"
+                    }
+                },
+    from: {
+    type: "string"
+                },
+    fromName: {
+    type: "string"
+                },
+    isHtml: {
+    type: "boolean"
+                },
+    subject: {
+    type: "string"
+                },
+    to: {
+    type: "array",
+    items: {
+    type: "string"
+                    }
+                }
+            },
+    title: "EmailRequest"
+        },
+    HistoryEditOrderInfoItemResponse: {
+    type: "object",
+    properties: {
+    name: {
+    type: "string"
+                },
+    new: {
+    type: "string"
+                },
+    old: {
+    type: "string"
+                }
+            },
+    title: "HistoryEditOrderInfoItemResponse"
+        },
+    HistoryEditOrderInfoRequest: {
+    type: "object",
+    properties: {
+    cusId: {
+    type: "integer",
+    format: "int64"
+                },
+    orderNumber: {
+    type: "string"
+                },
+    type: {
+    type: "string"
+                }
+            },
+    title: "HistoryEditOrderInfoRequest"
+        },
+    HistoryEditOrderInfoResponse: {
+    type: "object",
+    properties: {
+    editCustomerName: {
+    type: "string"
+                },
+    editCustomerPhone: {
+    type: "string"
+                },
+    editDate: {
+    type: "string"
+                },
+    editFee: {
+    type: "string"
+                },
+    list: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/HistoryEditOrderInfoItemResponse"
+                    }
+                }
+            },
+    title: "HistoryEditOrderInfoResponse"
+        },
+    LoginForm: {
+    type: "object",
+    properties: {
+    PARTNER_CODE: {
+    type: "string"
+                },
+    PASSWORD: {
+    type: "string"
+                },
+    USERNAME: {
+    type: "string"
+                },
+    roles: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/RoleForm"
+                    }
+                }
+            },
+    title: "LoginForm"
+        },
+    LoginFromWebRequest: {
+    type: "object",
+    properties: {
+    PASSWORD: {
+    type: "string"
+                },
+    USERNAME: {
+    type: "string"
+                }
+            },
+    title: "LoginFromWebRequest"
+        },
+    LoginOtpForm: {
+    type: "object",
+    properties: {
+    otp: {
+    type: "string"
+                },
+    phone: {
+    type: "string"
+                }
+            },
+    title: "LoginOtpForm"
+        },
+    LoginVTPForm: {
+    type: "object",
+    properties: {
+    token: {
+    type: "string"
+                }
+            },
+    title: "LoginVTPForm"
+        },
+    MakeOtpForm: {
+    type: "object",
+    properties: {
+    captcha: {
+    type: "string"
+                },
+    captcha_key: {
+    type: "string"
+                },
+    phone: {
+    type: "string"
+                }
+            },
+    title: "MakeOtpForm"
+        },
+    MakePaymentForm: {
+    type: "object",
+    properties: {
+    paymentDto: {
+    $ref: "#/definitions/PaymentBankDto"
+                },
+    signed: {
+    type: "string"
+                },
+    transactionAmount: {
+    type: "integer",
+    format: "int64"
+                },
+    transactionDate: {
+    type: "string",
+    format: "date-time"
+                },
+    transactionId: {
+    type: "string"
+                }
+            },
+    title: "MakePaymentForm"
+        },
+    OldOrderForm: {
+    type: "object",
+    properties: {
+    BAO_HIEM: {
+    type: "integer",
+    format: "int64"
+                },
+    DIACHI_KHGUI: {
+    type: "string"
+                },
+    DIACHI_KHNHAN: {
+    type: "string"
+                },
+    EMAIL_KHGUI: {
+    type: "string"
+                },
+    EMAIL_KHNHAN: {
+    type: "string"
+                },
+    GHI_CHU: {
+    type: "string"
+                },
+    HUYEN_KHGUI: {
+    type: "integer",
+    format: "int64"
+                },
+    HUYEN_KHNHAN: {
+    type: "integer",
+    format: "int64"
+                },
+    LINK_WEB: {
+    type: "string"
+                },
+    LOAI_VANDON: {
+    type: "integer",
+    format: "int64"
+                },
+    MA_DOITAC: {
+    type: "string"
+                },
+    MA_DV_VIETTEL: {
+    type: "string"
+                },
+    MA_LOAI_HANGHOA: {
+    type: "string"
+                },
+    MA_SHOP: {
+    type: "string"
+                },
+    MOTA_SP: {
+    type: "string"
+                },
+    NGAY_LAY_HANG: {
+    type: "string"
+                },
+    NGAY_TAO: {
+    type: "string"
+                },
+    ORDER_ID: {
+    type: "string"
+                },
+    PHUONGKHGUI: {
+    type: "integer",
+    format: "int64"
+                },
+    PHUONGKHNHAN: {
+    type: "integer",
+    format: "int64"
+                },
+    SO_LUONG: {
+    type: "integer",
+    format: "int64"
+                },
+    TEL_KHGUI: {
+    type: "string"
+                },
+    TEL_KHNHAN: {
+    type: "string"
+                },
+    TEN_KHGUI: {
+    type: "string"
+                },
+    TEN_KHNHAN: {
+    type: "string"
+                },
+    TIEN_HANG: {
+    type: "integer",
+    format: "int64"
+                },
+    TIEN_THU_HO: {
+    type: "integer",
+    format: "int64"
+                },
+    TINH_KHGUI: {
+    type: "string"
+                },
+    TINH_KHNHAN: {
+    type: "string"
+                },
+    TOKEN: {
+    type: "integer",
+    format: "int64"
+                },
+    TRONG_LUONG: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "OldOrderForm"
+        },
+    Operator«int»: {
+    type: "object",
+    properties: {
+    OPERATOR: {
+    type: "string"
+                },
+    VALUE: {
+    type: "integer",
+    format: "int32"
+                }
+            },
+    title: "Operator«int»"
+        },
+    Operator«long»: {
+    type: "object",
+    properties: {
+    OPERATOR: {
+    type: "string"
+                },
+    VALUE: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "Operator«long»"
+        },
+    Operator«string»: {
+    type: "object",
+    properties: {
+    OPERATOR: {
+    type: "string"
+                },
+    VALUE: {
+    type: "string"
+                }
+            },
+    title: "Operator«string»"
+        },
+    OrderAIForm: {
+    type: "object",
+    properties: {
+    CHECK_UNIQUE: {
+    type: "boolean"
+                },
+    CUS_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    DELIVERY_DATE: {
+    type: "string",
+    example: "dd/MM/yyyy HH:mm:ss"
+                },
+    EXTRA_MONEY: {
+    type: "integer",
+    format: "int64"
+                },
+    GROUPADDRESS_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_COLLECTION: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_TOTAL: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_TOTALFEE: {
+    type: "integer",
+    format: "int64"
+                },
+    ORDER_NOTE: {
+    type: "string"
+                },
+    ORDER_NUMBER: {
+    type: "string"
+                },
+    ORDER_PAYMENT: {
+    type: "integer",
+    format: "int64"
+                },
+    ORDER_SERVICE: {
+    type: "string"
+                },
+    ORDER_SERVICE_ADD: {
+    type: "string"
+                },
+    ORDER_TYPE: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_DESCRIPTION: {
+    type: "string"
+                },
+    PRODUCT_DETAIL: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/OrderItem"
+                    }
+                },
+    PRODUCT_HEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_LENGTH: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_NAME: {
+    type: "string"
+                },
+    PRODUCT_PRICE: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_QUANTITY: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_TYPE: {
+    type: "string"
+                },
+    PRODUCT_WEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_WIDTH: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_ADDRESS: {
+    type: "string"
+                },
+    RECEIVER_FULLNAME: {
+    type: "string"
+                },
+    RECEIVER_PHONE: {
+    type: "string"
+                },
+    RETURN_ADDRESS: {
+    $ref: "#/definitions/AddressInputForm"
+                },
+    SENDER_ADDRESS: {
+    type: "string"
+                },
+    SENDER_FULLNAME: {
+    type: "string"
+                },
+    SENDER_PHONE: {
+    type: "string"
+                },
+    TOKEN: {
+    type: "string"
+                },
+    VERIFICATION_CODE: {
+    $ref: "#/definitions/VerificationCode"
+                }
+            },
+    title: "OrderAIForm"
+        },
+    OrderDVC: {
+    type: "object",
+    properties: {
+    ORDER_NUMBER: {
+    type: "string"
+                },
+    ORDER_SERVICE: {
+    type: "string"
+                },
+    ORDER_SERVICE_ADD: {
+    type: "string"
+                },
+    PRODUCT_DESCRIPTION: {
+    type: "string"
+                },
+    PRODUCT_QUANTITY: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_WEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_ADDRESS: {
+    type: "string"
+                },
+    RECEIVER_CODE: {
+    type: "string"
+                },
+    RECEIVER_FULLNAME: {
+    type: "string"
+                },
+    RECEIVER_PHONE: {
+    type: "string"
+                },
+    SENDER_ADDRESS: {
+    type: "string"
+                },
+    SENDER_CODE: {
+    type: "string"
+                },
+    SENDER_FULLNAME: {
+    type: "string"
+                },
+    SENDER_PHONE: {
+    type: "string"
+                }
+            },
+    title: "OrderDVC"
+        },
+    OrderEditForm: {
+    type: "object",
+    properties: {
+    CHECK_REQUIRED: {
+    type: "boolean"
+                },
+    CREATE_ACCOUNT: {
+    type: "string"
+                },
+    CREATE_TYPE: {
+    type: "integer",
+    format: "int32"
+                },
+    CUSTOMER_CODE: {
+    type: "string"
+                },
+    CUS_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    DELIVERY_CODE: {
+    type: "integer",
+    format: "int32"
+                },
+    DELIVERY_DATE: {
+    type: "string",
+    example: "dd/MM/yyyy HH:mm:ss"
+                },
+    DYNAMIC_LINK: {
+    type: "string"
+                },
+    EXCHANGE_ID: {
+    type: "string"
+                },
+    EXCHANGE_WEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    FORCE_UPDATE: {
+    type: "boolean"
+                },
+    GROUPADDRESS_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    IS_BUUCUC: {
+    type: "boolean"
+                },
+    IS_COD_AUTO: {
+    type: "boolean"
+                },
+    LIST_ITEM: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/OrderItemForm"
+                    }
+                },
+    MONEY_COLLECTION: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEE: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEECOD: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEEINSURRANCE: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEEOTHER: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEEVAS: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_TOTAL: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_TOTALFEE: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_TOTALVAT: {
+    type: "integer",
+    format: "int64"
+                },
+    NATIONAL_TYPE: {
+    type: "integer",
+    format: "int64"
+                },
+    ORDER_EMPLOYER: {
+    type: "string"
+                },
+    ORDER_NOTE: {
+    type: "string"
+                },
+    ORDER_NUMBER: {
+    type: "string"
+                },
+    ORDER_NUMBER_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    ORDER_PAYMENT: {
+    type: "integer",
+    format: "int64"
+                },
+    ORDER_REFERENCE: {
+    type: "string"
+                },
+    ORDER_SERVICE: {
+    type: "string"
+                },
+    ORDER_SERVICE_ADD: {
+    type: "string"
+                },
+    ORDER_TYPE: {
+    type: "integer",
+    format: "int32"
+                },
+    ORDER_VOUCHER: {
+    type: "string"
+                },
+    PRODUCT_DESCRIPTION: {
+    type: "string"
+                },
+    PRODUCT_HEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_LENGTH: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_NAME: {
+    type: "string"
+                },
+    PRODUCT_PRICE: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_QUANTITY: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_TYPE: {
+    type: "string"
+                },
+    PRODUCT_WEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_WIDTH: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_ADDRESS: {
+    type: "string"
+                },
+    RECEIVER_CUS_ID: {
+    type: "string"
+                },
+    RECEIVER_DISTRICT: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_EMAIL: {
+    type: "string"
+                },
+    RECEIVER_FULLNAME: {
+    type: "string"
+                },
+    RECEIVER_LATITUDE: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_LONGITUDE: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_PHONE: {
+    type: "string"
+                },
+    RECEIVER_PROVINCE: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_WARD: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_ADDRESS: {
+    type: "string"
+                },
+    SENDER_DISTRICT: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_EMAIL: {
+    type: "string"
+                },
+    SENDER_FULLNAME: {
+    type: "string"
+                },
+    SENDER_LATITUDE: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_LONGITUDE: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_PHONE: {
+    type: "string"
+                },
+    SENDER_PROVINCE: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_WARD: {
+    type: "integer",
+    format: "int64"
+                },
+    TYPE: {
+    type: "integer",
+    format: "int64"
+                },
+    WEIGHT_TYPE: {
+    type: "integer",
+    format: "int32"
+                },
+    XMG_EXTRA_MONEY: {
+    type: "integer",
+    format: "int64"
+                },
+    ip: {
+    type: "string"
+                },
+    listPrice: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/PriceResponse"
+                    }
+                },
+    orderServiceAddWithEmpty: {
+    type: "string"
+                },
+    voucherId: {
+    type: "integer",
+    format: "int64"
+                },
+    voucherPrice: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "OrderEditForm"
+        },
+    OrderFilterForm: {
+    type: "object",
+    properties: {
+    filter: {
+    type: "string"
+                },
+    from_date: {
+    type: "string",
+    example: "dd/MM/yyyy"
+                },
+    list_inventory: {
+    type: "array",
+    items: {
+    type: "integer",
+    format: "int64"
+                    }
+                },
+    list_status: {
+    type: "array",
+    items: {
+    type: "integer",
+    format: "int32"
+                    }
+                },
+    to_date: {
+    type: "string",
+    example: "dd/MM/yyyy"
+                }
+            },
+    title: "OrderFilterForm"
+        },
+    OrderInfo: {
+    type: "object",
+    properties: {
+    CHECK_UNIQUE: {
+    type: "boolean"
+                },
+    CREATE_ACCOUNT: {
+    type: "string"
+                },
+    CREATE_TYPE: {
+    type: "integer",
+    format: "int32"
+                },
+    CUSTOMER_CODE: {
+    type: "string"
+                },
+    CUS_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    DELIVERY_CODE: {
+    type: "integer",
+    format: "int32"
+                },
+    DELIVERY_DATE: {
+    type: "string",
+    example: "dd/MM/yyyy HH:mm:ss"
+                },
+    EXCHANGE_WEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    EXTRA_MONEY: {
+    type: "integer",
+    format: "int64"
+                },
+    FROM_SOURCE: {
+    type: "string"
+                },
+    GROUPADDRESS_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    ID_PRICE_EXPRESS: {
+    type: "string"
+                },
+    IS_ADDRESS_NEW: {
+    type: "boolean"
+                },
+    KPI_HT: {
+    type: "number",
+    format: "double"
+                },
+    LIST_ITEM: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/OrderItem"
+                    }
+                },
+    MONEY_COLLECTION: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEE: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEECOD: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEEINSURRANCE: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEEOTHER: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_FEEVAS: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_TOTAL: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_TOTALFEE: {
+    type: "integer",
+    format: "int64"
+                },
+    MONEY_TOTALVAT: {
+    type: "integer",
+    format: "int64"
+                },
+    NATIONAL_TYPE: {
+    type: "integer",
+    format: "int64"
+                },
+    ORDER_NOTE: {
+    type: "string"
+                },
+    ORDER_NUMBER: {
+    type: "string"
+                },
+    ORDER_PAYMENT: {
+    type: "integer",
+    format: "int64"
+                },
+    ORDER_REFERENCE: {
+    type: "string"
+                },
+    ORDER_SERVICE: {
+    type: "string"
+                },
+    ORDER_SERVICE_ADD: {
+    type: "string"
+                },
+    ORDER_TYPE: {
+    type: "integer",
+    format: "int32"
+                },
+    ORDER_VOUCHER: {
+    type: "string"
+                },
+    PARTNER: {
+    type: "integer",
+    format: "int64"
+                },
+    PARTNER_CODE: {
+    type: "string"
+                },
+    PRODUCT_DESCRIPTION: {
+    type: "string"
+                },
+    PRODUCT_HEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_LENGTH: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_NAME: {
+    type: "string"
+                },
+    PRODUCT_PRICE: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_QUANTITY: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_TYPE: {
+    type: "string"
+                },
+    PRODUCT_WEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_WIDTH: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_ADDRESS: {
+    type: "string"
+                },
+    RECEIVER_DISTRICT: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_DISTRICT_CODE: {
+    type: "string"
+                },
+    RECEIVER_DISTRICT_OLD: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_DISTRICT_OLD_CODE: {
+    type: "string"
+                },
+    RECEIVER_EMAIL: {
+    type: "string"
+                },
+    RECEIVER_FULLNAME: {
+    type: "string"
+                },
+    RECEIVER_HOME_NO: {
+    type: "string"
+                },
+    RECEIVER_HOME_NO_ID: {
+    type: "string"
+                },
+    RECEIVER_LATITUDE: {
+    type: "number",
+    format: "double"
+                },
+    RECEIVER_LONGITUDE: {
+    type: "number",
+    format: "double"
+                },
+    RECEIVER_PHONE: {
+    type: "string"
+                },
+    RECEIVER_PROVINCE: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_PROVINCE_CODE: {
+    type: "string"
+                },
+    RECEIVER_PROVINCE_OLD: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_PROVINCE_OLD_CODE: {
+    type: "string"
+                },
+    RECEIVER_WARD: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_WARD_CODE: {
+    type: "string"
+                },
+    RECEIVER_WARD_OLD: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_WARS_OLD_CODE: {
+    type: "string"
+                },
+    RETURN_ADDRESS: {
+    $ref: "#/definitions/AddressInputForm"
+                },
+    SENDER_ADDRESS: {
+    type: "string"
+                },
+    SENDER_DISTRICT: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_DISTRICT_CODE: {
+    type: "string"
+                },
+    SENDER_DISTRICT_OLD: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_DISTRICT_OLD_CODE: {
+    type: "string"
+                },
+    SENDER_EMAIL: {
+    type: "string"
+                },
+    SENDER_FULLNAME: {
+    type: "string"
+                },
+    SENDER_HOME_NO: {
+    type: "string"
+                },
+    SENDER_HOME_NO_ID: {
+    type: "string"
+                },
+    SENDER_LATITUDE: {
+    type: "number",
+    format: "double"
+                },
+    SENDER_LONGITUDE: {
+    type: "number",
+    format: "double"
+                },
+    SENDER_PHONE: {
+    type: "string"
+                },
+    SENDER_PROVINCE: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_PROVINCE_CODE: {
+    type: "string"
+                },
+    SENDER_PROVINCE_OLD: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_PROVINCE_OLD_CODE: {
+    type: "string"
+                },
+    SENDER_WARD: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_WARD_CODE: {
+    type: "string"
+                },
+    SENDER_WARD_OLD: {
+    type: "integer",
+    format: "int64"
+                },
+    SENDER_WARS_OLD_CODE: {
+    type: "string"
+                },
+    TOKEN: {
+    type: "string"
+                },
+    TYPE: {
+    type: "integer",
+    format: "int64"
+                },
+    VERIFICATION_CODE: {
+    $ref: "#/definitions/VerificationCode"
+                },
+    checkCountAddressNew: {
+    type: "boolean"
+                },
+    priceNonAi: {
+    type: "boolean"
+                }
+            },
+    title: "OrderInfo"
+        },
+    OrderItem: {
+    type: "object",
+    properties: {
+    ORDER_NUMBER: {
+    type: "string"
+                },
+    ORDER_NUMBER_ITEM: {
+    type: "string"
+                },
+    PRODUCT_NAME: {
+    type: "string"
+                },
+    PRODUCT_PRICE: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_QUANTITY: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_TYPE: {
+    type: "string"
+                },
+    PRODUCT_WEIGHT: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "OrderItem"
+        },
+    OrderItemForm: {
+    type: "object",
+    properties: {
+    ORDER_NUMBER: {
+    type: "string"
+                },
+    ORDER_NUMBER_ITEM: {
+    type: "string"
+                },
+    PRODUCT_NAME: {
+    type: "string"
+                },
+    PRODUCT_PRICE: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_QUANTITY: {
+    type: "integer",
+    format: "int64"
+                },
+    PRODUCT_WEIGHT: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "OrderItemForm"
+        },
+    OrderPriceDVC: {
+    type: "object",
+    properties: {
+    ORDER_SERVICE: {
+    type: "string"
+                },
+    ORDER_SERVICE_ADD: {
+    type: "string"
+                },
+    PRODUCT_WEIGHT: {
+    type: "integer",
+    format: "int64"
+                },
+    RECEIVER_ADDRESS: {
+    type: "string"
+                },
+    RECEIVER_CODE: {
+    type: "string"
+                },
+    SENDER_ADDRESS: {
+    type: "string"
+                },
+    SENDER_CODE: {
+    type: "string"
+                }
+            },
+    title: "OrderPriceDVC"
+        },
+    OrderSaveForm: {
+    type: "object",
+    properties: {
+    customerCode: {
+    type: "string"
+                },
+    newMoneyCollection: {
+    type: "integer",
+    format: "int64"
+                },
+    newWeight: {
+    type: "integer",
+    format: "int64"
+                },
+    orderNumber: {
+    type: "string"
+                }
+            },
+    title: "OrderSaveForm"
+        },
+    OrderShopeeRequest: {
+    type: "object",
+    properties: {
+    jwt: {
+    type: "string"
+                }
+            },
+    title: "OrderShopeeRequest"
+        },
+    OrderStatusData: {
+    type: "object",
+    properties: {
+    ORDER_NUMBER: {
+    type: "string"
+                },
+    STATUS: {
+    type: "string"
+                }
+            },
+    title: "OrderStatusData"
+        },
+    PartnerQuestionCommon: {
+    type: "object",
+    properties: {
+    answer: {
+    type: "string"
+                },
+    category: {
+    type: "string"
+                },
+    createdAt: {
+    type: "string",
+    format: "date-time"
+                },
+    id: {
+    type: "string"
+                },
+    question: {
+    type: "string"
+                },
+    updatedAt: {
+    type: "string",
+    format: "date-time"
+                }
+            },
+    title: "PartnerQuestionCommon"
+        },
+    PaymentBankDto: {
+    type: "object",
+    properties: {
+    accountNo: {
+    type: "string"
+                },
+    description: {
+    type: "string"
+                },
+    documentId: {
+    type: "integer",
+    format: "int64"
+                },
+    documentNo: {
+    type: "string"
+                },
+    employeeId: {
+    type: "integer",
+    format: "int64"
+                },
+    employeeName: {
+    type: "string"
+                },
+    grandTotal: {
+    type: "integer",
+    format: "int64"
+                },
+    note: {
+    type: "string"
+                },
+    orgCode: {
+    type: "string"
+                },
+    paymentBankCode: {
+    type: "string"
+                },
+    paymentBankId: {
+    type: "integer",
+    format: "int64"
+                },
+    postCode: {
+    type: "string"
+                },
+    status: {
+    type: "integer",
+    format: "int64"
+                },
+    transactionId: {
+    type: "string"
+                }
+            },
+    title: "PaymentBankDto"
+        },
+    PriceResponse: {
+    type: "object",
+    properties: {
+    KPI: {
+    type: "string"
+                },
+    PRICE: {
+    type: "string"
+                },
+    SERVICE_CODE: {
+    type: "string"
+                },
+    SERVICE_NAME: {
+    type: "string"
+                }
+            },
+    title: "PriceResponse"
+        },
+    PrintForm: {
+    type: "object",
+    properties: {
+    EXPIRY_TIME: {
+    type: "integer",
+    format: "int64"
+                },
+    ORDER_ARRAY: {
+    type: "array",
+    items: {
+    type: "string"
+                    }
+                },
+    PRINT_TOKEN: {
+    type: "string"
+                },
+    TYPE: {
+    type: "integer",
+    format: "int32"
+                }
+            },
+    title: "PrintForm"
+        },
+    PrintFormV2: {
+    type: "object",
+    properties: {
+    EXPIRY_TIME: {
+    type: "integer",
+    format: "int64"
+                },
+    ORDER_ARRAY: {
+    type: "array",
+    items: {
+    type: "string"
+                    }
+                }
+            },
+    title: "PrintFormV2"
+        },
+    ProductForm: {
+    type: "object",
+    properties: {
+    productCode: {
+    type: "string"
+                },
+    qty: {
+    type: "integer",
+    format: "int64"
+                },
+    weight: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "ProductForm"
+        },
+    RegisterForm: {
+    type: "object",
+    properties: {
+    ADDRESS: {
+    type: "string"
+                },
+    DISTRICT_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    EMAIL: {
+    type: "string"
+                },
+    NAME: {
+    type: "string"
+                },
+    PASSWORD: {
+    type: "string"
+                },
+    PHONE: {
+    type: "string"
+                },
+    WARDS_ID: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "RegisterForm"
+        },
+    ResData«CheckEditOrderInfoResponse»: {
+    type: "object",
+    properties: {
+    data: {
+    $ref: "#/definitions/CheckEditOrderInfoResponse"
+                },
+    error: {
+    type: "boolean"
+                },
+    message: {
+    type: "string"
+                },
+    status: {
+    type: "integer",
+    format: "int32"
+                }
+            },
+    title: "ResData«CheckEditOrderInfoResponse»"
+        },
+    ResData«List«HistoryEditOrderInfoResponse»»: {
+    type: "object",
+    properties: {
+    data: {
+    type: "array",
+    items: {
+    $ref: "#/definitions/HistoryEditOrderInfoResponse"
+                    }
+                },
+    error: {
+    type: "boolean"
+                },
+    message: {
+    type: "string"
+                },
+    status: {
+    type: "integer",
+    format: "int32"
+                }
+            },
+    title: "ResData«List«HistoryEditOrderInfoResponse»»"
+        },
+    ResData«boolean»: {
+    type: "object",
+    properties: {
+    data: {
+    type: "boolean"
+                },
+    error: {
+    type: "boolean"
+                },
+    message: {
+    type: "string"
+                },
+    status: {
+    type: "integer",
+    format: "int32"
+                }
+            },
+    title: "ResData«boolean»"
+        },
+    ResponseEntity: {
+    type: "object",
+    properties: {
+    body: {
+    type: "object"
+                },
+    statusCode: {
+    type: "string",
+    enum: [
+                        "100",
+                        "101",
+                        "102",
+                        "103",
+                        "200",
+                        "201",
+                        "202",
+                        "203",
+                        "204",
+                        "205",
+                        "206",
+                        "207",
+                        "208",
+                        "226",
+                        "300",
+                        "301",
+                        "302",
+                        "303",
+                        "304",
+                        "305",
+                        "307",
+                        "308",
+                        "400",
+                        "401",
+                        "402",
+                        "403",
+                        "404",
+                        "405",
+                        "406",
+                        "407",
+                        "408",
+                        "409",
+                        "410",
+                        "411",
+                        "412",
+                        "413",
+                        "414",
+                        "415",
+                        "416",
+                        "417",
+                        "418",
+                        "419",
+                        "420",
+                        "421",
+                        "422",
+                        "423",
+                        "424",
+                        "426",
+                        "428",
+                        "429",
+                        "431",
+                        "451",
+                        "500",
+                        "501",
+                        "502",
+                        "503",
+                        "504",
+                        "505",
+                        "506",
+                        "507",
+                        "508",
+                        "509",
+                        "510",
+                        "511"
+                    ]
+                },
+    statusCodeValue: {
+    type: "integer",
+    format: "int32"
+                }
+            },
+    title: "ResponseEntity"
+        },
+    RoleForm: {
+    type: "object",
+    properties: {
+    roleID: {
+    type: "integer",
+    format: "int64"
+                },
+    roleName: {
+    type: "string"
+                }
+            },
+    title: "RoleForm"
+        },
+    UpdateOrderForm: {
+    type: "object",
+    properties: {
+    DATE: {
+    type: "string",
+    example: "dd/MM/yyyy HH:mm:ss"
+                },
+    GROUPADDRESS_ID: {
+    type: "integer",
+    format: "int64"
+                },
+    ID_HANDOVER: {
+    type: "integer",
+    format: "int64"
+                },
+    NOTE: {
+    type: "string"
+                },
+    ORDER_NUMBER: {
+    type: "string"
+                },
+    PARTNER_CODE: {
+    type: "string"
+                },
+    TYPE: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "UpdateOrderForm"
+        },
+    UpdateUrlRequest: {
+    type: "object",
+    properties: {
+    SECRET: {
+    type: "string"
+                },
+    URL: {
+    type: "string"
+                }
+            },
+    title: "UpdateUrlRequest"
+        },
+    UpdateUserRequest: {
+    type: "object",
+    properties: {
+    EMAIL: {
+    type: "string"
+                },
+    FULLNAME: {
+    type: "string"
+                },
+    PHONE: {
+    type: "string"
+                }
+            },
+    title: "UpdateUserRequest"
+        },
+    UserInfo2: {
+    type: "object",
+    properties: {
+    address: {
+    type: "string"
+                },
+    birthday: {
+    type: "string",
+    format: "date-time"
+                },
+    districtId: {
+    type: "integer",
+    format: "int64"
+                },
+    email: {
+    type: "string"
+                },
+    identity: {
+    type: "string"
+                },
+    identityDate: {
+    type: "string",
+    format: "date-time"
+                },
+    name: {
+    type: "string"
+                },
+    phone: {
+    type: "string"
+                },
+    provinceId: {
+    type: "integer",
+    format: "int64"
+                },
+    sex: {
+    type: "string"
+                },
+    wardsId: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "UserInfo2"
+        },
+    VerificationCode: {
+    type: "object",
+    properties: {
+    TYPE: {
+    type: "string"
+                },
+    VALUE: {
+    type: "string"
+                }
+            },
+    title: "VerificationCode"
+        },
+    VipoEncrypt: {
+    type: "object",
+    properties: {
+    enc: {
+    type: "string"
+                }
+            },
+    title: "VipoEncrypt"
+        },
+    WebhookData: {
+    type: "object",
+    properties: {
+    description: {
+    type: "string"
+                },
+    order_number: {
+    type: "string"
+                },
+    status: {
+    type: "integer",
+    format: "int64"
+                }
+            },
+    title: "WebhookData"
+        }
+    }
+}
