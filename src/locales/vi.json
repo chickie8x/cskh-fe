@@ -111,6 +111,7 @@
   "deleteOrderSuccess": "Xóa đơn hàng thành công",
   "cancelOrderFailed": "Hủy đơn hàng thất bại",
   "deleteOrderFailed": "Xóa đơn hàng thất bại",
+  "multiOrderSearchGuide": "Lưu ý: tìm kiếm nhiều mã vận đơn thì các mã vận đơn cách nhau dấu phẩy",
 
   "_COMMENT_TICKETS": "TICKETS VIEW",
   "ticketsManagement": "Tickets",
@@ -142,7 +143,7 @@
   "missingOrders": "Mã vận đơn không tìm thấy trên hệ thống",
   "syncOrder": "Đồng bộ đơn hàng",
   "syncSuccess": "Đồng bộ đơn hàng thành công",
-  "syncFailed": "Đồng bộ đơn hàng thất bại",
+  "syncFailed": "Đồng bộ đơn hàng thất bại hoặc không tồn tại đơn hàng trên hệ thống đơn vị vận chuyển",
   "NEW": "Mới tạo",
   "IN_PROGRESS": "Đang xử lý",
   "ASSIGNED": "Đã giao",
@@ -151,6 +152,9 @@
   "MEDIUM": "Trung bình",
   "HIGH": "Cao",
   "notPermissionDeleteTicket": "Không có quyền xóa ticket",
+  "trackingNumbersRequiredForTicketCreation": "Nhập mã vận đơn và bấm tìm kiếm",
+  "ticketCategoryRequiredForTicketCreation": "Chọn loại ticket",
+  "errorFetchingOrders": "Lỗi khi tìm kiếm mã vận đơn",
 
   "_COMMENT_NOTIFICATION": "NOTIFICATION VIEW",
   "carrierRequired": "Đối tác không được để trống",

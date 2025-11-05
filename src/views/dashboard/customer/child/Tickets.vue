@@ -302,6 +302,14 @@ const doSearchOrder = async () => {
 }
 
 const createTicket = async () => {
+  if (!selectedOrders.value.length) {
+    toast.error(t('trackingNumbersRequiredForTicketCreation'))
+    return
+  }
+  if (!selectTicketCategory.value) {
+    toast.error(t('ticketCategoryRequiredForTicketCreation'))
+    return
+  }
   try {
     const response = await api.post('/customer/ticket/create', {
       category: selectTicketCategory.value,

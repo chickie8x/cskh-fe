@@ -20,9 +20,6 @@ export const useAuthStore = defineStore('auth', {
     },
 
     setTokens(tk, rt) {
-      console.log('set new token')
-      console.log(tk)
-      console.log(rt)
       if (tk) {
         this.accessToken = tk
         this.user = this.decodeToken(tk)

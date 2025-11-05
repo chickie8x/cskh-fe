@@ -18,7 +18,8 @@
       </Card>
     </div>
 
-    <div class="mt-4 flex items-center gap-4">
+    <span class="text-sm text-orange-500 flex mt-8">*{{ t('multiOrderSearchGuide') }}</span>
+    <div class="mt-1 flex items-center gap-4">
       <div
         class="flex items-center gap-2 border border-border bg-white dark:bg-card h-9 rounded-sm max-w-64 shadow-sm px-2"
       >
