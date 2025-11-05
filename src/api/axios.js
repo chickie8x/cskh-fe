@@ -8,7 +8,7 @@ export const setAuthStore = (store) => {
 }
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://14.225.1.34/api',
   timeout: 30000,
 })
 
@@ -33,7 +33,7 @@ api.interceptors.response.use(
       orig._retry = true
       try {
         const { data } = await axios.post(
-          'http://localhost:3000/api/auth/refresh',
+          'http://14.225.1.34/api/auth/refresh',
           { refreshToken: authStore.getRefreshToken }
         )
 
