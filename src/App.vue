@@ -52,7 +52,6 @@ let sseClose = null
 watch(
   user,
   (newUser) => {
-    console.log(newUser)
     if (newUser?.id && !sseClose) {
       // Initialize SSE connection when user is available
       const { data, close } = useEventSource(`${SSE_URL}/${newUser.id}`, [], {

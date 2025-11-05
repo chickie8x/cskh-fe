@@ -1,45 +1,57 @@
 import axios from 'axios'
-import { useAuthStore } from '@/stores/auth'
+import { markRaw } from 'vue'
 
-const authStore = () => useAuthStore()
+let authStore = null
+
+export const setAuthStore = (store) => {
+  authStore = markRaw(store)   // tránh Vue proxy
+}
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || 'http://14.225.1.34/api',
-  withCredentials: true, // include cookies
-  timeout: 3000,
+  timeout: 30000,
 })
 
-// Attach token before every request
+// ---------- REQUEST ----------
 api.interceptors.request.use((config) => {
-  const token = authStore().getAccessToken
-  if (token) config.headers.Authorization = `Bearer ${token}`
+  if (authStore?.getAccessToken) {
+    config.headers.Authorization = `Bearer ${authStore.getAccessToken}`
+  }
   return config
 })
 
-// Auto refresh expired access token
+// ---------- RESPONSE ----------
 api.interceptors.response.use(
   (res) => res,
   async (error) => {
-    if (error.response?.status === 401 && !error.config._retry && authStore().getRefreshToken) {
-      error.config._retry = true
+    const orig = error.config
+    if (
+      error.response?.status === 401 &&
+      !orig._retry &&
+      authStore?.getRefreshToken
+    ) {
+      orig._retry = true
       try {
-        const res = await api.post('http://14.225.1.34/api/auth/refresh',{
-          refreshToken: authStore().getRefreshToken
-        })
-        console.log(res.data)
-        if (res.data.success) {
-          authStore().setTokens(res.data.token, res.data.refreshToken)
-          console.log(res.data.token)
-          error.config.headers.Authorization = `Bearer ${res.data.token}`
-          return api(error.config)
+        // Dùng axios thuần để tránh loop interceptor
+        const { data } = await axios.post(
+          'http://14.225.1.34/api/auth/refresh',
+          { refreshToken: authStore.getRefreshToken }
+        )
+
+        if (data.success) {
+          const { token, refreshToken } = data.data
+          authStore.setTokens(token, refreshToken)
+          orig.headers.Authorization = `Bearer ${token}`
+          return api(orig)
         }
-      } catch (refreshError) {
-        console.error('Token refresh failed')
+      } catch (e) {
+        console.error('Refresh failed', e)
+        authStore.logout?.()
         window.location.href = '/login'
       }
     }
     return Promise.reject(error)
-  },
+  }
 )
 
 export default api

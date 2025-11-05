@@ -6,22 +6,29 @@ import i18n from './i18n'
 
 import App from './App.vue'
 import router from './router'
+import api, { setAuthStore } from '@/api/axios'          // <-- import api
+import { useAuthStore } from '@/stores/auth'      // <-- import store
 
 const app = createApp(App)
 const pinia = createPinia()
+
+// ---------- Persist plugin ----------
 pinia.use(({ store }) => {
-  // 1. F5 → tự đọc từ localStorage
-  const saved = localStorage.getItem(`pinia_${store.$id}`)
+  const key = `pinia_${store.$id}`
+  const saved = localStorage.getItem(key)
   if (saved) store.$patch(JSON.parse(saved))
 
-  // 2. Mỗi lần store thay đổi → tự lưu
   store.$subscribe((_, state) => {
-    localStorage.setItem(`pinia_${store.$id}`, JSON.stringify(state))
+    localStorage.setItem(key, JSON.stringify(state))
   })
 })
 
-app.use(pinia)
+// ---------- Install ----------
+app.use(pinia)          // <-- Pinia phải được mount trước
 app.use(router)
 app.use(i18n)
+
+// ---------- Inject store vào api ----------
+setAuthStore(useAuthStore())   // <-- bây giờ Pinia đã active
 
 app.mount('#app')
