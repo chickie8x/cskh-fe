@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { ref, watch, computed, toRaw } from 'vue'
+import { ref, watch, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import * as XLSX from 'xlsx'
 import ExcelTable from '@/components/kits/excel-table/index.vue'
@@ -37,6 +37,7 @@ import { Button } from '@/components/ui/button'
 import { Plus, Download, ShieldAlert, ListChecks, FilePlus } from 'lucide-vue-next'
 import api from '@/api/axios.js'
 import { useAuthStore } from '@/stores/auth'
+import { v4 as uuidv4 } from 'uuid'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -107,7 +108,7 @@ function onFileChange(e) {
     //add verify id
     rows = rows.map((row) => {
       const newRow = { ...row }
-      newRow.VERIFY_ID = crypto.randomUUID()
+      newRow.VERIFY_ID = uuidv4()
       return newRow
     })
 
