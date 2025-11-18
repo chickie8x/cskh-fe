@@ -81,51 +81,49 @@
     </div>
     <div class="mt-4 border-y border-border py-4 flex items-center gap-8">
       <Select v-model="searchTicketCategory">
-          <SelectTrigger>
-            <SelectValue :placeholder="t('selectTicketCategory')" class="w-48" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem
-              v-for="category in TICKET_CATEGORY"
-              :key="category.value"
-              :value="category.value"
-            >
-              {{ t(category.key) }}
-            </SelectItem>
-          </SelectContent>
-        </Select>
+        <SelectTrigger>
+          <SelectValue :placeholder="t('selectTicketCategory')" class="w-48" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem
+            v-for="category in TICKET_CATEGORY"
+            :key="category.value"
+            :value="category.value"
+          >
+            {{ t(category.key) }}
+          </SelectItem>
+        </SelectContent>
+      </Select>
 
-        <Select v-model="searchTicketPriority">
-          <SelectTrigger>
-            <SelectValue :placeholder="t('selectTicketPriority')" class="w-48" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem
-              v-for="priority in BADGE_PRIORITY"
-              :key="priority.value"
-              :value="priority.value"
-            >
-              {{ t(priority.value) }}
-            </SelectItem>
-          </SelectContent>
-        </Select>
+      <Select v-model="searchTicketPriority">
+        <SelectTrigger>
+          <SelectValue :placeholder="t('selectTicketPriority')" class="w-48" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem
+            v-for="priority in BADGE_PRIORITY"
+            :key="priority.value"
+            :value="priority.value"
+          >
+            {{ t(priority.value) }}
+          </SelectItem>
+        </SelectContent>
+      </Select>
 
-        <Select v-model="searchTicketStatus">
-          <SelectTrigger>
-            <SelectValue :placeholder="t('selectTicketStatus')" class="w-48" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem
-              v-for="status in BADGE_STATUS"
-              :key="status.value"
-              :value="status.value"
-            >
-              {{ t(status.value) }}
-            </SelectItem>
-          </SelectContent>
-        </Select>
+      <Select v-model="searchTicketStatus">
+        <SelectTrigger>
+          <SelectValue :placeholder="t('selectTicketStatus')" class="w-48" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem v-for="status in BADGE_STATUS" :key="status.value" :value="status.value">
+            {{ t(status.value) }}
+          </SelectItem>
+        </SelectContent>
+      </Select>
 
-        <Button @click="fetchTickets" variant="default"><Search class="w-4 h-4" />{{ t('searchOrder') }}</Button>
+      <Button @click="fetchTickets" variant="default"
+        ><Search class="w-4 h-4" />{{ t('searchOrder') }}</Button
+      >
     </div>
     <div class="mt-4">
       <Table
@@ -137,7 +135,7 @@
       />
     </div>
     <div>
-      <Pagination :configs="pagination" @pageChange="handlePageChange"/>  
+      <Pagination :configs="pagination" @pageChange="handlePageChange" />
     </div>
     <Dialog
       :open="open"
@@ -159,7 +157,10 @@
           </div>
           <div class="flex items-center justify-between p-4 border-b border-border">
             <span>Mức độ ưu tiên</span>
-            <span :class="BADGE_PRIORITY.find((item) => item.value === selectedTicket.priority).style">{{ selectedTicket.priority }}</span>
+            <span
+              :class="BADGE_PRIORITY.find((item) => item.value === selectedTicket.priority).style"
+              >{{ selectedTicket.priority }}</span
+            >
           </div>
           <div class="flex items-center justify-between p-4 border-b border-border">
             <span>Khách hàng</span>
@@ -178,9 +179,12 @@
             class="flex items-center justify-between p-4 border-b border-border"
           >
             <span>Trạng thái</span>
-            <span :class="BADGE_STATUS.find((item) => item.value === selectedTicket.status).style">{{
-              t(BADGE_STATUS.find((item) => item.value === selectedTicket.status).label)
-            }}</span>
+            <span
+              :class="BADGE_STATUS.find((item) => item.value === selectedTicket.status).style"
+              >{{
+                t(BADGE_STATUS.find((item) => item.value === selectedTicket.status).label)
+              }}</span
+            >
           </div>
           <div class="flex items-center justify-between p-4 border-b border-border">
             <span>Ghi chú</span>
@@ -207,12 +211,7 @@ import {
   SelectValue,
   SelectItem,
 } from '@/components/ui/select'
-import {
-  TICKET_TABLE_HEADER,
-  BADGE_STATUS,
-  TICKET_CATEGORY,
-  BADGE_PRIORITY,
-} from '@/utils/config'
+import { TICKET_TABLE_HEADER, BADGE_STATUS, TICKET_CATEGORY, BADGE_PRIORITY } from '@/utils/config'
 import api from '@/api/axios'
 import { formatDateTime } from '@/utils/format'
 import { toast } from 'vue-sonner'
@@ -332,7 +331,6 @@ const fetchTickets = async () => {
     console.error('Error fetching tickets:', error)
   }
 }
-
 
 const createTicket = async () => {
   if (!selectTicketCategory.value) {

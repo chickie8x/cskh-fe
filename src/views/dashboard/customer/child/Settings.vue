@@ -43,8 +43,28 @@
       <div v-else>
         <p class="text-center">No carriers connected</p>
       </div>
-      <div>
+      <div class="flex flex-col gap-4 border-t border-border py-4">
         <h2 class="font-bold text-sm">{{ t('addresses') }}</h2>
+        <div class="flex items-center gap-2">
+          <Button v-if="!isAddAddress" variant="default" @click="addAddress"
+            ><PlusIcon /> {{ t('addAddress') }}</Button
+          >
+          <Button v-else variant="outline" @click="cancelAddress"
+            ><XIcon /> {{ t('cancel') }}</Button
+          >
+          <div
+            v-if="isAddAddress"
+            class="h-9 overflow-hidden border border-border flex items-center gap-2 rounded-md"
+          >
+            <input
+              class="border-none outline-none px-2 text-sm min-w-96"
+              type="text"
+              v-model="newAddress"
+              :placeholder="t('enterAddress')"
+            />
+            <Button variant="ghost" @click="saveAddress"><Check /></Button>
+          </div>
+        </div>
         <div v-for="address in addresses" :key="address.id">
           <AddressBar :address="address" />
         </div>
@@ -98,7 +118,7 @@
 <script setup>
 import { Card, CardHeader, CardContent, CardDescription, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { CirclePlus, RefreshCcw } from 'lucide-vue-next'
+import { CirclePlus, RefreshCcw, PlusIcon, XIcon, Check } from 'lucide-vue-next'
 import { onMounted, ref } from 'vue'
 import { getCarriers, connectCarrier } from '@/api/setting'
 import { formatDate } from '@/utils/format'
@@ -114,6 +134,7 @@ import {
 import { toast } from 'vue-sonner'
 import { useAuthStore } from '@/stores/auth'
 import AddressBar from '@/components/kits/addressbar/index.vue'
+import api from '@/api/axios'
 
 const addresses = ref(useAuthStore().getUserAddress)
 const { t } = useI18n()
@@ -123,6 +144,8 @@ const carrierGeneralInfo = ref([])
 const open = ref(false)
 const carrier = ref(null)
 const connectedCarrier = ref([])
+const newAddress = ref('')
+const isAddAddress = ref(false)
 const carriers = [
   {
     value: 'VIETTEL_POST',
@@ -180,6 +203,36 @@ const getAddresses = async () => {
     useAuthStore().setUserAddress(res.data)
   } catch (error) {
     console.log(error)
+  }
+}
+
+const addAddress = () => {
+  isAddAddress.value = true
+}
+
+const cancelAddress = () => {
+  newAddress.value = ''
+  isAddAddress.value = false
+}
+
+const saveAddress = async () => {
+  if (!newAddress.value) {
+    toast.error('Address is required')
+    return
+  }
+  try {
+    const res = await api.post('/customer/address', {
+      address: newAddress.value,
+    })
+    addresses.value.unshift({
+      address: res.data.data.address,
+      id: res.data.data.id,
+    })
+    isAddAddress.value = false
+    newAddress.value = ''
+  } catch (error) {
+    console.log(error)
+    toast.error(error.response.data.message)
   }
 }
 

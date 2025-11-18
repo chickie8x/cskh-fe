@@ -3,12 +3,12 @@
     <thead>
       <tr class="border-b border-border divide-x divide-border">
         <th
-          class="whitespace-nowrap px-4 py-2 sticky left-0 z-20 bg-gray-300 dark:bg-gray-800 border-r border-b border-border sticky-fix"
+          class="min-w-25 whitespace-nowrap px-4 py-2 sticky left-0 z-20 bg-gray-300 dark:bg-gray-800 border-r border-b border-border sticky-fix"
         >
           {{ t('colState') }}
         </th>
         <th
-          class="whitespace-nowrap px-4 py-2 sticky left-[100px] z-20 bg-gray-300 dark:bg-gray-800 border-r border-b border-border sticky-fix"
+          class="min-w-25 whitespace-nowrap px-4 py-2 sticky left-[100px] z-20 bg-gray-300 dark:bg-gray-800 border-r border-b border-border sticky-fix"
         >
           {{ t('colTotalMoney') }}
         </th>
@@ -32,9 +32,15 @@
         <td
           class="sticky left-0 z-10 bg-gray-200 border-r border-b border-border sticky-fix font-bold text-center"
           :class="[
-            row.VERIFY_STATE === 'SUCCESS' ? 'text-blue-500 bg-blue-200 dark:bg-blue-900 dark:text-blue-400' : '',
-            row.VERIFY_STATE === 'FAILED' ? 'text-red-500 bg-red-200 dark:bg-red-900 dark:text-red-400' : '',
-            row.VERIFY_STATE === 'CREATED' ? 'text-green-500 bg-green-200 dark:bg-green-900 dark:text-green-400' : '',
+            row.VERIFY_STATE === 'SUCCESS'
+              ? 'text-blue-500 bg-blue-200 dark:bg-blue-900 dark:text-blue-400'
+              : '',
+            row.VERIFY_STATE === 'FAILED'
+              ? 'text-red-500 bg-red-200 dark:bg-red-900 dark:text-red-400'
+              : '',
+            row.VERIFY_STATE === 'CREATED'
+              ? 'text-green-500 bg-green-200 dark:bg-green-900 dark:text-green-400'
+              : '',
           ]"
         >
           {{ row.VERIFY_STATE ? row.VERIFY_STATE : '' }}
@@ -42,9 +48,15 @@
         <td
           class="sticky left-[100px] z-10 bg-gray-200 border-r border-b border-border sticky-fix font-bold text-center"
           :class="[
-            row.VERIFY_STATE === 'SUCCESS' ? 'text-blue-500 bg-blue-200 dark:bg-blue-900 dark:text-blue-400' : '',
-            row.VERIFY_STATE === 'FAILED' ? 'text-red-500 bg-red-200 dark:bg-red-900 dark:text-red-400' : '',
-            row.VERIFY_STATE === 'CREATED' ? 'text-green-500 bg-green-200 dark:bg-green-900 dark:text-green-400' : '',
+            row.VERIFY_STATE === 'SUCCESS'
+              ? 'text-blue-500 bg-blue-200 dark:bg-blue-900 dark:text-blue-400'
+              : '',
+            row.VERIFY_STATE === 'FAILED'
+              ? 'text-red-500 bg-red-200 dark:bg-red-900 dark:text-red-400'
+              : '',
+            row.VERIFY_STATE === 'CREATED'
+              ? 'text-green-500 bg-green-200 dark:bg-green-900 dark:text-green-400'
+              : '',
           ]"
         >
           {{ row.TOTAL_MONEY ? formatCurrency(row.TOTAL_MONEY) : '' }}

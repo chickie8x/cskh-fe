@@ -82,11 +82,11 @@
   "totalQueryOrders": "Tổng số mã vận đơn tìm kiếm",
   "foundOrders": "Tìm thấy",
   "notFoundOrders": "Không tìm thấy",
-
+  "sender": "Người gửi",
+  "emptySenderAddress": "Không có địa chỉ người gửi, vui lòng cài đặt địa chỉ người gửi",
 
   "_COMMENT_TABLE": "TABLE VIEW",
   "noData": "Không có dữ liệu",
-  
 
   "_COMMENT_DASHBOARD": "DASHBOARD VIEW",
   "orderManagement": "Quản lý đơn hàng",
@@ -172,6 +172,8 @@
 
   "_COMMENT_SETTINGS": "SETTINGS VIEW",
   "addresses": "Địa chỉ",
+  "addAddress": "Thêm",
+  "enterAddress": "Nhập địa chỉ",
 
   "_COMMENT_NOTIFICATION": "NOTIFICATION VIEW",
   "carrierRequired": "Đối tác không được để trống",

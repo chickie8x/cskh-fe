@@ -10,11 +10,26 @@
       />
       <span v-if="fileName" class="text-gray-700 text-sm">{{ fileName }}</span>
       <Button variant="outline" @click="loadFile"><Plus /> {{ t('uploadExcel') }}</Button>
-      <Button v-if="orderData.length" @click="verifyOrders" variant="outline"><ListChecks/> </Button>
+      <Button v-if="orderData.length" @click="verifyOrders" variant="outline"
+        ><ListChecks />
+      </Button>
       <Button v-if="isVerify" @click="createOrders"><FilePlus /> {{ t('createOrders') }}</Button>
       <Button @click="downloadTemplate" variant="outline" class="ml-auto"
         ><Download /> {{ t('downloadExcel') }}</Button
       >
+    </div>
+    <div class="mt-4">
+      <span class="text-sm font-semibold">{{ t('sender') }}</span>
+      <Select v-model="selectedSenderAddress">
+        <SelectTrigger>
+          <SelectValue placeholder="Chọn địa chỉ" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem v-for="address in senderAddresses" :key="address.id" :value="address.address">
+            {{ `${senderName} - ${senderPhone} - ${address.address}` }}
+          </SelectItem>
+        </SelectContent>
+      </Select>
     </div>
     <div v-if="excelData.length" class="mt-4">
       <div v-if="haveErrorOrders" class="flex items-center gap-2 text-orange-500 py-2 text-sm">
@@ -38,6 +53,13 @@ import { Plus, Download, ShieldAlert, ListChecks, FilePlus } from 'lucide-vue-ne
 import api from '@/api/axios.js'
 import { useAuthStore } from '@/stores/auth'
 import { v4 as uuidv4 } from 'uuid'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -47,6 +69,10 @@ const excelData = ref([])
 const orderData = ref([])
 const tbHeaders = ref([])
 const isVerify = ref(false)
+const senderAddresses = ref(authStore.userAddress || [])
+const selectedSenderAddress = ref(senderAddresses.value[0].address)
+const senderName = ref(authStore.user?.name || '')
+const senderPhone = ref(authStore.user?.phone || '')
 const haveErrorOrders = computed(() => {
   return excelData.value.some((order) => order['VERIFY_STATE'] === 'FAILED')
 })
@@ -150,9 +176,9 @@ const mapObjectKey = {
 const orderObject = () => {
   return {
     ORDER_NUMBER: '',
-    SENDER_FULLNAME: authStore.user?.name,
-    SENDER_ADDRESS: authStore.userAddress[0].address,
-    SENDER_PHONE: '',
+    SENDER_FULLNAME: senderName.value,
+    SENDER_ADDRESS: selectedSenderAddress.value,
+    SENDER_PHONE: senderPhone.value,
     RECEIVER_FULLNAME: '',
     RECEIVER_ADDRESS: '',
     RECEIVER_PHONE: '',
@@ -279,8 +305,12 @@ const verifyOrders = async () => {
 }
 
 const createOrders = async () => {
+  if (!selectedSenderAddress.value) {
+    toast.error(t('emptySenderAddress'))
+    return
+  }
   const orders = orderData.value.filter((order) => {
-    if(order.VERIFY_STATE === 'SUCCESS'){
+    if (order.VERIFY_STATE === 'SUCCESS') {
       return order
     }
   })
@@ -297,7 +327,7 @@ const createOrders = async () => {
   results.forEach((result) => {
     if (result.status === 'fulfilled') {
       const { res, index } = result.value
-      if(res.data.success){
+      if (res.data.success) {
         excelData.value[index]['VERIFY_STATE'] = 'CREATED'
       }
     } else {

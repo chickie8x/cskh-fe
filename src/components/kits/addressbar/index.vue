@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex items-center gap-2 border border-border rounded-md w-fit px-2 py-1"
-    :class="isEditing ? 'bg-white' : 'bg-gray-50'"
+    :class="isEditing ? 'bg-white dark:bg-card' : 'bg-gray-50 dark:bg-card'"
   >
     <input
       class="text-sm outline-none border-none"

@@ -103,9 +103,9 @@
           </span>
         </div>
       </div>
-      <span class="text-sm text-red-500 flex font-bold">{{ t('missingOrders') }}</span>  
+      <span class="text-sm text-red-500 flex font-bold">{{ t('missingOrders') }}</span>
       <ul class="list-disc px-4 py-2 flex flex-wrap gap-8 text-sm text-orange-500">
-        <li v-for="item, idx in missingOrders" :key="idx">
+        <li v-for="(item, idx) in missingOrders" :key="idx">
           {{ item }}
         </li>
       </ul>
@@ -121,7 +121,7 @@
       />
     </div>
     <div v-if="data.length > 0">
-      <Pagination :configs="paginationConfig" @pageChange="handlePageChange"/>
+      <Pagination :configs="paginationConfig" @pageChange="handlePageChange" />
     </div>
   </div>
   <Dialog
@@ -338,7 +338,7 @@ const getOrderList = async () => {
       data.value = res.data.data
       paginationConfig.value = res.data.pagination
       missingOrders.value = res.data.missingOrders
-      if(data.value.length === 0){
+      if (data.value.length === 0) {
         toast.info(t('noData'))
       }
     }
@@ -442,7 +442,7 @@ const handlePageChange = (page) => {
 }
 
 const updateFilter = (val) => {
-  filteredOrders.value = val.map(state => {
+  filteredOrders.value = val.map((state) => {
     return ORDER_STATUS_DETAIL[state].codes
   })
   filteredOrders.value = filteredOrders.value.flat(Infinity)
