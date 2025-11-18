@@ -16,7 +16,7 @@ export async function logout() {
     authStore.clearTokens()
     const notificationStore = useNotificationStore()
     notificationStore.clearNotifications()
-
+    authStore.setUserAddress(null)
     return true
   } catch (error) {
     console.log(error)

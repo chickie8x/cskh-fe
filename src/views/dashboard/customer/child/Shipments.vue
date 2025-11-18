@@ -4,6 +4,10 @@
       <div>
         <h1 class="text-2xl font-bold">{{ t('createOrder') }}</h1>
         <span class="text-sm text-muted-foreground">{{ t('createOrderDescription') }}</span>
+        <div class="flex items-center gap-2">
+          <input class="w-4 h-4" type="checkbox" v-model="isMultiOrders" />
+          <span class="capitalize font-semibold text-indigo-500">{{ t('multiOrders') }}</span>
+        </div>
       </div>
       <div class="flex gap-4">
         <div v-for="carrier in carriers" :key="carrier.id">
@@ -31,8 +35,8 @@
     </div>
 
     <div class="flex gap-4 h-full w-full">
-      <div class="w-full">
-        <component :is="currCarrier === 'vtp' ? ViettelPost : GHN"></component>
+      <div class="w-full h-full">
+        <component :is="currComponent"></component>
       </div>
     </div>
   </div>
@@ -42,6 +46,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ViettelPost from '@/components/kits/carriers/viettelpost/createOrder.vue'
+import ViettelPostMultiOrders from '@/components/kits/carriers/viettelpost/createMultiOrders.vue'
 import GHN from '@/components/kits/carriers/ghn/createOrder.vue'
 
 const { t } = useI18n()
@@ -61,5 +66,13 @@ const carriers = ref([
   },
 ])
 
+const isMultiOrders = ref(false)
 const currCarrier = ref(carriers.value[0].value)
+const currComponent = computed(() => {
+  if (currCarrier.value === 'vtp') {
+    return isMultiOrders.value ? ViettelPostMultiOrders : ViettelPost
+  } else if (currCarrier.value === 'ghn') {
+    return GHN
+  }
+})
 </script>

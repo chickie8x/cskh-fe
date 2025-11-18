@@ -4,7 +4,7 @@
 
     <div class="flex flex-col gap-4">
       <div class="flex items-center justify-between">
-        <h2>{{ t('connectedCarriers') }}</h2>
+        <h2 class="font-bold text-sm">{{ t('connectedCarriers') }}</h2>
         <Button variant="default" @click="open = true"><CirclePlus /> Connect</Button>
       </div>
       <div v-if="carrierGeneralInfo.length > 0">
@@ -42,6 +42,12 @@
       </div>
       <div v-else>
         <p class="text-center">No carriers connected</p>
+      </div>
+      <div>
+        <h2 class="font-bold text-sm">{{ t('addresses') }}</h2>
+        <div v-for="address in addresses" :key="address.id">
+          <AddressBar :address="address" />
+        </div>
       </div>
     </div>
     <Dialog
@@ -106,7 +112,10 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { toast } from 'vue-sonner'
+import { useAuthStore } from '@/stores/auth'
+import AddressBar from '@/components/kits/addressbar/index.vue'
 
+const addresses = ref(useAuthStore().getUserAddress)
 const { t } = useI18n()
 const vtpUsername = ref('')
 const vtpPassword = ref('')
@@ -164,7 +173,20 @@ const handleConnect = async () => {
   }
 }
 
+const getAddresses = async () => {
+  try {
+    const res = await getAddresses()
+    addresses.value = res.data
+    useAuthStore().setUserAddress(res.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 onMounted(() => {
   getCustomerCarriers()
+  if (!useAuthStore().getUserAddress) {
+    getAddresses()
+  }
 })
 </script>

@@ -5,7 +5,7 @@
       <span class="text-muted-foreground text-sm">{{ t('orderManagementDescription') }}</span>
     </div>
 
-    <div class="flex justify-between items-center gap-2 mt-4">
+    <div class="flex justify-between items-center gap-2 mt-4 border-b border-border pb-8">
       <Card v-for="info in generalInfo" :key="info.key" class="w-64 border-transparent">
         <CardHeader>
           <CardTitle>
@@ -18,56 +18,100 @@
       </Card>
     </div>
 
-    <span class="text-sm text-orange-500 flex mt-8">*{{ t('multiOrderSearchGuide') }}</span>
-    <div class="mt-1 flex items-center gap-4">
-      <div
-        class="flex items-center gap-2 border border-border bg-white dark:bg-card h-9 rounded-sm max-w-64 shadow-sm px-2"
-      >
-        <input
-          v-model="orders"
-          type="search"
-          :placeholder="t('orderGetByNumber')"
-          class="border-none outline-none w-full px-2"
-        />
-        <Search class="size-6 opacity-50" />
-      </div>
-      <div>
-        <VueDatePicker
-          v-model="date"
-          range
-          :placeholder="t('orderGetByDate')"
-          :enable-time-picker="false"
-          :format="formatDateRange"
-          :dark="isDark"
-          locale="vi-VN"
-          :disabled="disabledDate"
-        />
-      </div>
-      <div>
-        <Select v-model="carrier">
-          <SelectTrigger
-            class="border-transparent bg-white shadow-sm"
-            :class="[carrierError ? 'border-red-500  bg-red-50' : '']"
+    <span class="text-sm text-orange-500 flex mt-4">*{{ t('multiOrderSearchGuide') }}</span>
+    <div class="mt-1 flex items-stretch gap-4 border-b border-border pb-4">
+      <div class="flex flex-col justify-center gap-2 flex-1">
+        <div class="flex items-center gap-2">
+          <div
+            class="flex items-center gap-2 border border-border bg-white dark:bg-card h-9 rounded-sm w-full max-w-96 shadow-sm px-2"
           >
-            <SelectValue
-              :placeholder="t('getOrderByCarrier')"
-              :class="[carrierError ? 'text-red-500' : '']"
+            <input
+              v-model="orders"
+              type="search"
+              :placeholder="t('orderGetByNumber')"
+              class="border-none outline-none w-full px-2"
             />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem :value="null">
-              {{ t('allCariers') }}
-            </SelectItem>
-            <SelectItem v-for="carrier in carries" :key="carrier.value" :value="carrier.value">
-              {{ carrier.label }}
-            </SelectItem>
-          </SelectContent>
-        </Select>
+            <Search class="size-6 opacity-50" />
+          </div>
+          <div>
+            <VueDatePicker
+              v-model="date"
+              range
+              :placeholder="t('orderGetByDate')"
+              :enable-time-picker="false"
+              :format="formatDateRange"
+              :dark="isDark"
+              locale="vi-VN"
+              :disabled="disabledDate"
+            />
+          </div>
+          <div>
+            <Select v-model="carrier">
+              <SelectTrigger
+                class="border-transparent bg-white shadow-sm"
+                :class="[carrierError ? 'border-red-500  bg-red-50' : '']"
+              >
+                <SelectValue
+                  :placeholder="t('getOrderByCarrier')"
+                  :class="[carrierError ? 'text-red-500' : '']"
+                />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem :value="null">
+                  {{ t('allCariers') }}
+                </SelectItem>
+                <SelectItem v-for="carrier in carries" :key="carrier.value" :value="carrier.value">
+                  {{ carrier.label }}
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <MultiSelector
+            ref="multiSelectorRef"
+            :orders="data"
+            :isDisabled="disabledMultiSelector"
+            @updateFilter="updateFilter"
+          />
+        </div>
       </div>
-      <Button @click="getOrderList">{{ t('searchOrder') }}</Button>
+      <div class="flex flex-col h-full gap-2">
+        <Button @click="getOrderList" variant="default">{{ t('searchOrder') }}</Button>
+        <Button @click="resetFilterOrders" variant="outline">{{ t('resetFilterBtn') }}</Button>
+      </div>
     </div>
 
-    <div class="mt-4">
+    <div v-if="missingOrders.length > 0">
+      <div class="py-4">
+        <div>
+          <span class="text-sm font-semibold">{{ t('totalQueryOrders') }}: </span>
+          <span class="font-bold text-blue-500">
+            {{ orders.split(',').length }}
+          </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">{{ t('foundOrders') }}: </span>
+          <span class="font-bold text-green-500">
+            {{ data.length }}
+          </span>
+        </div>
+        <div>
+          <span class="text-sm font-semibold">{{ t('notFoundOrders') }}: </span>
+          <span class="font-bold text-red-500">
+            {{ missingOrders.length }}
+          </span>
+        </div>
+      </div>
+      <span class="text-sm text-red-500 flex font-bold">{{ t('missingOrders') }}</span>  
+      <ul class="list-disc px-4 py-2 flex flex-wrap gap-8 text-sm text-orange-500">
+        <li v-for="item, idx in missingOrders" :key="idx">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="mt-4" v-if="data.length > 0">
       <Table
         :tb-header="ORDER_TABLE_HEADER"
         :data="data"
@@ -75,6 +119,9 @@
         :actionCol="false"
         @colAction="handleColAction"
       />
+    </div>
+    <div v-if="data.length > 0">
+      <Pagination :configs="paginationConfig" @pageChange="handlePageChange"/>
     </div>
   </div>
   <Dialog
@@ -113,7 +160,8 @@ import { Search } from 'lucide-vue-next'
 import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 import { useDark } from '@vueuse/core'
-import { orderStatusMap } from '@/utils/helper'
+import { orderStatusMap, filterOrdersByLabels } from '@/utils/helper'
+import MultiSelector from '@/components/kits/multiSelector/index.vue'
 import {
   Select,
   SelectContent,
@@ -123,6 +171,9 @@ import {
 } from '@/components/ui/select'
 import { Button } from '@/components/ui/button'
 import { toast } from 'vue-sonner'
+import { useAuthStore } from '@/stores/auth'
+import Pagination from '@/components/kits/pagination/index.vue'
+import { ORDER_STATUS_DETAIL } from '@/utils/helper'
 
 const { t } = useI18n()
 const isDark = useDark()
@@ -131,6 +182,7 @@ const data = ref([])
 const carrier = ref(null)
 const orders = ref('')
 const disabledDate = computed(() => orders.value.length > 0)
+const disabledMultiSelector = computed(() => orders.value.length > 0)
 const carrierError = ref(false)
 const totalOrdersCount = ref(0)
 const totalCollectedCount = ref(0)
@@ -142,6 +194,24 @@ const selectedDialogContent = ref('')
 const submitBtnText = ref('')
 const btnSubmitShow = ref(false)
 const submitBtnVariant = ref('default')
+const missingOrders = ref([])
+const filteredOrders = ref([])
+const multiSelectorRef = ref(null)
+const paginationConfig = ref({
+  page: 1,
+  limit: 10,
+  total: 0,
+  totalPages: 0,
+})
+
+const query = ref({
+  page: 1,
+  limit: 10,
+  carrier: carrier.value,
+  date: date.value,
+  state: filteredOrders.value,
+})
+
 const carries = [
   {
     value: 'VIETTEL_POST',
@@ -254,8 +324,6 @@ const styling = ref({
   },
 })
 
-const query = ref({})
-
 const getOrderList = async () => {
   if (orders.value.length > 0 && carrier.value === null) {
     carrierError.value = true
@@ -268,7 +336,11 @@ const getOrderList = async () => {
     })
     if (res.data.success) {
       data.value = res.data.data
-      console.log(res.data.data)
+      paginationConfig.value = res.data.pagination
+      missingOrders.value = res.data.missingOrders
+      if(data.value.length === 0){
+        toast.info(t('noData'))
+      }
     }
   } catch (error) {
     console.log(error)
@@ -286,6 +358,21 @@ const getOrderSummary = async () => {
     }
   } catch (error) {
     console.log(error)
+  }
+}
+
+const getAddresses = async () => {
+  const authStore = useAuthStore()
+  const address = authStore.getUserAddress
+  if (!address) {
+    try {
+      const res = await api.get('customer/address')
+      if (res.data.success) {
+        authStore.setUserAddress(res.data.data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
@@ -341,6 +428,28 @@ const handleDialogSubmit = async () => {
   }
 }
 
+const resetFilterOrders = () => {
+  orders.value = ''
+  date.value = []
+  carrier.value = null
+  query.value.state = null
+  multiSelectorRef.value.resetState()
+}
+
+const handlePageChange = (page) => {
+  query.value.page = page
+  getOrderList()
+}
+
+const updateFilter = (val) => {
+  filteredOrders.value = val.map(state => {
+    return ORDER_STATUS_DETAIL[state].codes
+  })
+  filteredOrders.value = filteredOrders.value.flat(Infinity)
+  query.value.state = filteredOrders.value.join(',')
+  console.log(query.value.state)
+}
+
 watch(orders, () => {
   if (orders.value.length > 0) {
     date.value = []
@@ -391,5 +500,6 @@ watch(totalCanceledCount, () => {
 onMounted(() => {
   getOrderList()
   getOrderSummary()
+  getAddresses()
 })
 </script>

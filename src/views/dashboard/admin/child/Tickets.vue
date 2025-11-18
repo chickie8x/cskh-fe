@@ -95,23 +95,31 @@
           </div>
           <div class="flex flex-col p-4 border-b border-border">
             <span>Vận đơn</span>
-            <span class="font-semibold" v-for="item in selectedTicket.ticketItems" :key="item.id">{{ item.waybill }}({{ item.carrier }}),  </span>
+            <span class="font-semibold" v-for="item in selectedTicket.ticketItems" :key="item.id"
+              >{{ item.waybill }}({{ item.carrier }}),
+            </span>
           </div>
-          <div v-if="selectedTicket.status" class="flex items-center justify-between p-4 border-b border-border">
+          <div
+            v-if="selectedTicket.status"
+            class="flex items-center justify-between p-4 border-b border-border"
+          >
             <span>Trạng thái {{ selectedTicket.status }}</span>
-            <Select v-model="selectedTicket.status" :disabled="selectedTicket.status==='CLOSED'">
+            <Select v-model="selectedTicket.status" :disabled="selectedTicket.status === 'CLOSED'">
               <SelectTrigger>
                 <SelectValue placeholder="Chọn trạng thái" />
               </SelectTrigger>
               <SelectContent>
-              <SelectItem :value=null>Tất cả</SelectItem>
-              <SelectItem v-for="item in ticketCategories" :key="item.value" :value="item.value">{{
-                t(item.label)
-              }}</SelectItem>
-            </SelectContent>
-          </Select>
+                <SelectItem :value="null">Tất cả</SelectItem>
+                <SelectItem
+                  v-for="item in ticketCategories"
+                  :key="item.value"
+                  :value="item.value"
+                  >{{ t(item.label) }}</SelectItem
+                >
+              </SelectContent>
+            </Select>
           </div>
-      </div>
+        </div>
       </template>
     </Dialog>
   </div>
@@ -250,11 +258,11 @@ const searchTickets = () => {
   queryParams.value.priority = ticketPriority.value
   queryParams.value.ticketUserId = customer.value
   getTickets()
-} 
+}
 
 const handleEdit = (row) => {
   console.log(row)
-  selectedTicket.value = {...row}
+  selectedTicket.value = { ...row }
   open.value = true
 }
 
@@ -264,7 +272,10 @@ const handleDelete = (row) => {
 
 const handleUpdateTicket = async () => {
   try {
-    const data = await api.post(`/ticket/update`, {id: selectedTicket.value.id, status: selectedTicket.value.status})
+    const data = await api.post(`/ticket/update`, {
+      id: selectedTicket.value.id,
+      status: selectedTicket.value.status,
+    })
     console.log(data)
     open.value = false
     getTickets()

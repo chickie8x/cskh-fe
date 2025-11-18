@@ -99,6 +99,16 @@ onMounted(async () => {
       router.push('/login')
     }
   }
+  const address = authStore.getUserAddress
+  if (!address) {
+    try {
+      const data = await api.get('/customer/address')
+      authStore.setUserAddress(data.data.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // Initialize and fetch notifications
   try {
     const notificationData = await getNotifications()

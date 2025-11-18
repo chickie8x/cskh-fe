@@ -6,6 +6,7 @@ export const useAuthStore = defineStore('auth', {
     accessToken: null,
     refreshToken: null,
     user: null,
+    userAddress: null,
   }),
 
   actions: {
@@ -33,6 +34,11 @@ export const useAuthStore = defineStore('auth', {
       this.accessToken = null
       this.refreshToken = null
       this.user = null
+      this.userAddress = null
+    },
+
+    setUserAddress(address) {
+      this.userAddress = address
     },
   },
 
@@ -40,5 +46,6 @@ export const useAuthStore = defineStore('auth', {
     getAccessToken: (state) => state.accessToken,
     getRefreshToken: (state) => state.refreshToken,
     getUser: (state) => state.user,
+    getUserAddress: (state) => state.userAddress,
   },
 })

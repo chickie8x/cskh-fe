@@ -59,39 +59,6 @@
           :placeholder="t('enterTrackingNumbers')"
           v-model="orderNumbers"
         />
-        <Button variant="default" @click="doSearchOrder"
-          ><Search class="size-4" />{{ t('searchOrder') }}</Button
-        >
-      </div>
-      <div v-if="missingOrders.length > 0" class="p-4">
-        <span class="font-medium">{{ t('missingOrders') }}</span>
-        <ul class="list-disc">
-          <li v-for="(order, idx) in missingOrders" :key="idx" class="flex items-center gap-4 p-2">
-            <MissingOrder :order="order" @syncOrderCarrier="syncOrderCarrier" />
-          </li>
-        </ul>
-      </div>
-      <div v-if="searchOrders.length > 0" class="p-4">
-        <span class="font-medium">{{ t('ticketItems') }}</span>
-        <div>
-          <div
-            v-for="(order, idx) in searchOrders"
-            :key="idx"
-            class="flex items-center justify-between gap-2 p-2"
-            :class="[idx % 2 === 0 ? 'bg-gray-100 dark:bg-background' : 'bg-white dark:bg-card']"
-          >
-            <input
-              class="scale-125"
-              type="checkbox"
-              v-model="selectedOrders"
-              :value="{ waybill: order.waybill, carrier: order.carrier }"
-            />
-            <span>{{ order.waybill }}</span>
-            <span>{{ order.carrier }}</span>
-            <span>{{ order.rawData.ORDER_STATUS }}</span>
-            <span>{{ order.rawData.ORDER_STATUSDATE }}</span>
-          </div>
-        </div>
       </div>
       <div class="p-4 flex items-center justify-end gap-2">
         <Button @click="createTicket" class="min-w-28" variant="default"
@@ -112,8 +79,65 @@
         </CardContent>
       </Card>
     </div>
+    <div class="mt-4 border-y border-border py-4 flex items-center gap-8">
+      <Select v-model="searchTicketCategory">
+          <SelectTrigger>
+            <SelectValue :placeholder="t('selectTicketCategory')" class="w-48" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem
+              v-for="category in TICKET_CATEGORY"
+              :key="category.value"
+              :value="category.value"
+            >
+              {{ t(category.key) }}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select v-model="searchTicketPriority">
+          <SelectTrigger>
+            <SelectValue :placeholder="t('selectTicketPriority')" class="w-48" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem
+              v-for="priority in BADGE_PRIORITY"
+              :key="priority.value"
+              :value="priority.value"
+            >
+              {{ t(priority.value) }}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Select v-model="searchTicketStatus">
+          <SelectTrigger>
+            <SelectValue :placeholder="t('selectTicketStatus')" class="w-48" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem
+              v-for="status in BADGE_STATUS"
+              :key="status.value"
+              :value="status.value"
+            >
+              {{ t(status.value) }}
+            </SelectItem>
+          </SelectContent>
+        </Select>
+
+        <Button @click="fetchTickets" variant="default"><Search class="w-4 h-4" />{{ t('searchOrder') }}</Button>
+    </div>
     <div class="mt-4">
-      <Table :tbHeader="TICKET_TABLE_HEADER" :data="tickets" :styling="tableStyling" @actionEdit="handleEdit" @actionDelete="handleDelete"/>
+      <Table
+        :tbHeader="TICKET_TABLE_HEADER"
+        :data="tickets"
+        :styling="tableStyling"
+        @actionEdit="handleEdit"
+        @actionDelete="handleDelete"
+      />
+    </div>
+    <div>
+      <Pagination :configs="pagination" @pageChange="handlePageChange"/>  
     </div>
     <Dialog
       :open="open"
@@ -135,7 +159,7 @@
           </div>
           <div class="flex items-center justify-between p-4 border-b border-border">
             <span>Mức độ ưu tiên</span>
-            <span class="font-semibold">{{ selectedTicket.priority }}</span>
+            <span :class="BADGE_PRIORITY.find((item) => item.value === selectedTicket.priority).style">{{ selectedTicket.priority }}</span>
           </div>
           <div class="flex items-center justify-between p-4 border-b border-border">
             <span>Khách hàng</span>
@@ -143,13 +167,26 @@
           </div>
           <div class="flex flex-col p-4 border-b border-border">
             <span>Vận đơn</span>
-            <span class="font-semibold" v-for="item in selectedTicket.ticketItems" :key="item.id">{{ item.waybill }}({{ item.carrier }}),  </span>
+            <div class="flex flex-wrap gap-4">
+              <span class="font-semibold" v-for="item in selectedTicket.ticketItems" :key="item.id"
+                >{{ item.waybill }}
+              </span>
+            </div>
           </div>
-          <div v-if="selectedTicket.status" class="flex items-center justify-between p-4 border-b border-border">
-            <span>Trạng thái {{ selectedTicket.status }}</span>
-            <span>{{ t(BADGE_STATUS.find((item) => item.value === selectedTicket.status).label) }}</span>
+          <div
+            v-if="selectedTicket.status"
+            class="flex items-center justify-between p-4 border-b border-border"
+          >
+            <span>Trạng thái</span>
+            <span :class="BADGE_STATUS.find((item) => item.value === selectedTicket.status).style">{{
+              t(BADGE_STATUS.find((item) => item.value === selectedTicket.status).label)
+            }}</span>
           </div>
-      </div>
+          <div class="flex items-center justify-between p-4 border-b border-border">
+            <span>Ghi chú</span>
+            <span class="font-semibold">{{ selectedTicket.description }}</span>
+          </div>
+        </div>
       </template>
     </Dialog>
   </div>
@@ -175,24 +212,37 @@ import {
   BADGE_STATUS,
   TICKET_CATEGORY,
   BADGE_PRIORITY,
-  CARRIERS,
 } from '@/utils/config'
 import api from '@/api/axios'
 import { formatDateTime } from '@/utils/format'
-import MissingOrder from '@/components/kits/missingOrder/index.vue'
 import { toast } from 'vue-sonner'
+import Pagination from '@/components/kits/pagination/index.vue'
 
 const { t } = useI18n()
 const tickets = ref([])
 const selectedTicket = ref(null)
 const showCreateTicket = ref(false)
 const selectTicketCategory = ref(null)
+const searchTicketCategory = ref(null)
+const searchTicketStatus = ref(null)
 const orderNumbers = ref('')
 const ticketNote = ref('')
-const searchOrders = ref([])
-const missingOrders = ref([])
-const selectedOrders = ref([])
+const searchTicketPriority = ref(null)
 const open = ref(false)
+const query = ref({
+  category: null,
+  priority: null,
+  status: null,
+  page: 1,
+  limit: 10,
+})
+const pagination = ref({
+  page: 1,
+  limit: 10,
+  total: 0,
+  totalPages: 0,
+})
+
 const generalInfo = [
   {
     key: 'openTicket',
@@ -215,8 +265,6 @@ const generalInfo = [
     value: 0,
   },
 ]
-
-const orderCarriers = ref({})
 
 const tableStyling = {
   category: {
@@ -277,44 +325,29 @@ const tableStyling = {
 
 const fetchTickets = async () => {
   try {
-    const response = await api.get('/customer/tickets')
+    const response = await api.get('/customer/tickets', { params: query.value })
     tickets.value = response.data.data
+    pagination.value = response.data.pagination
   } catch (error) {
     console.error('Error fetching tickets:', error)
   }
 }
 
-const doSearchOrder = async () => {
-  if (!orderNumbers.value) {
-    return
-  }
-  try {
-    const response = await api.get('/common/orders', {
-      params: {
-        orderNumber: orderNumbers.value,
-      },
-    })
-    searchOrders.value = response.data.data.orders
-    missingOrders.value = response.data.data.missingOrders
-  } catch (error) {
-    console.error('Error fetching orders:', error)
-  }
-}
 
 const createTicket = async () => {
-  if (!selectedOrders.value.length) {
-    toast.error(t('trackingNumbersRequiredForTicketCreation'))
-    return
-  }
   if (!selectTicketCategory.value) {
     toast.error(t('ticketCategoryRequiredForTicketCreation'))
+    return
+  }
+  if (!orderNumbers.value.length) {
+    toast.error(t('trackingNumbersRequiredForTicketCreation'))
     return
   }
   try {
     const response = await api.post('/customer/ticket/create', {
       category: selectTicketCategory.value,
       description: ticketNote.value,
-      ticketItems: selectedOrders.value,
+      ticketItems: orderNumbers.value.trim().split(','),
     })
     console.log(response.data)
     await fetchTickets()
@@ -322,14 +355,6 @@ const createTicket = async () => {
   } catch (error) {
     console.error('Error creating ticket:', error)
   }
-}
-
-const syncOrderCarrier = (order) => {
-  const index = missingOrders.value.findIndex((item) => item === order.waybill)
-  if (index > -1) {
-    missingOrders.value.splice(index, 1)
-  }
-  searchOrders.value.push(order)
 }
 
 const handleEdit = (ticket) => {
@@ -342,25 +367,19 @@ const handleDelete = (ticket) => {
   toast.warning(t('notPermissionDeleteTicket'))
 }
 
-const handleUpdateTicket = async () => {
-  try {
-    const response = await api.put(`/customer/ticket/${selectedTicket.value.id}`, {
-      status: selectedTicket.value.status,
-    })
-    console.log(response.data)
-    await fetchTickets()
-    open.value = false
-  } catch (error) {
-    console.error('Error updating ticket:', error)
-  }
+const handlePageChange = async (page) => {
+  query.value.page = page
+  await fetchTickets()
 }
 
-watch(missingOrders, () => {
-  if (missingOrders.value.length > 0) {
-    missingOrders.value.forEach((order) => {
-      orderCarriers.value[order] = null
-    })
-  }
+watch(searchTicketCategory, () => {
+  query.value.category = searchTicketCategory.value
+})
+watch(searchTicketPriority, () => {
+  query.value.priority = searchTicketPriority.value
+})
+watch(searchTicketStatus, () => {
+  query.value.status = searchTicketStatus.value
 })
 
 onMounted(() => {

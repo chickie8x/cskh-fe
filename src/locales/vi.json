@@ -73,9 +73,20 @@
   "createOrderFailedMessage": "Tạo đơn hàng thất bại, đã có lỗi xảy ra",
   "requiredFields": "Lưu ý :(*) là các trường bắt buộc nhập",
   "requiredFieldsMissing": "Thiếu thông tin , vui lòng kiểm tra lại",
+  "multiOrders": "Nhập excel",
+  "uploadExcel": "Chọn file",
+  "createOrders": "Tạo đơn",
+  "downloadExcel": "Tải file mẫu",
+  "orderVerifyWarning": "Lưu ý: Có đơn không hợp lệ, kiểm tra lại thông tin đơn hàng trong file excel, chọn giá trị hợp lệ và load lại file",
+  "verifyOrder": "Xác minh đơn hàng",
+  "totalQueryOrders": "Tổng số mã vận đơn tìm kiếm",
+  "foundOrders": "Tìm thấy",
+  "notFoundOrders": "Không tìm thấy",
+
 
   "_COMMENT_TABLE": "TABLE VIEW",
   "noData": "Không có dữ liệu",
+  
 
   "_COMMENT_DASHBOARD": "DASHBOARD VIEW",
   "orderManagement": "Quản lý đơn hàng",
@@ -112,6 +123,7 @@
   "cancelOrderFailed": "Hủy đơn hàng thất bại",
   "deleteOrderFailed": "Xóa đơn hàng thất bại",
   "multiOrderSearchGuide": "Lưu ý: tìm kiếm nhiều mã vận đơn thì các mã vận đơn cách nhau dấu phẩy",
+  "resetFilterBtn": "Xóa bộ lọc",
 
   "_COMMENT_TICKETS": "TICKETS VIEW",
   "ticketsManagement": "Tickets",
@@ -152,9 +164,14 @@
   "MEDIUM": "Trung bình",
   "HIGH": "Cao",
   "notPermissionDeleteTicket": "Không có quyền xóa ticket",
-  "trackingNumbersRequiredForTicketCreation": "Nhập mã vận đơn và bấm tìm kiếm",
+  "trackingNumbersRequiredForTicketCreation": "Mã vận đơn không được để trống",
   "ticketCategoryRequiredForTicketCreation": "Chọn loại ticket",
   "errorFetchingOrders": "Lỗi khi tìm kiếm mã vận đơn",
+  "selectTicketPriority": "Chọn mức độ ưu tiên",
+  "selectTicketStatus": "Chọn trạng thái ticket",
+
+  "_COMMENT_SETTINGS": "SETTINGS VIEW",
+  "addresses": "Địa chỉ",
 
   "_COMMENT_NOTIFICATION": "NOTIFICATION VIEW",
   "carrierRequired": "Đối tác không được để trống",
@@ -163,5 +180,9 @@
   "ticketCreatedFailed": "Đã có lỗi xảy ra, vui lòng thử lại",
 
   "_COMMENT_DIALOG": "DIALOG VIEW",
-  "close": "Đóng"
+  "close": "Đóng",
+
+  "_COMMENT_EXCEL_TABLE": "EXCEL TABLE VIEW",
+  "colState": "Trạng thái",
+  "colTotalMoney": "Tổng cước"
 }

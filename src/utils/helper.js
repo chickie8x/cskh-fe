@@ -69,6 +69,32 @@ export function orderStatusMap(code) {
   return entry || ['Không xác định', { color: 'bg-gray-500/10 text-gray-600 border-gray-400/20' }]
 }
 
+const LABEL_TO_CODES_MAP = {}
+Object.entries(ORDER_STATUS_DETAIL).forEach(([label, { codes }]) => {
+  LABEL_TO_CODES_MAP[label] = new Set(codes.map(String)) // dùng String để đồng nhất
+})
+
+/**
+ * Filter danh sách vận đơn theo một hoặc nhiều nhãn
+ * @param {Array} orders - danh sách vận đơn, mỗi đơn có thuộc tính `statusCode` (hoặc tên field bạn dùng)
+ * @param {string|string[]} labels - nhãn muốn filter (có thể là 1 hoặc mảng)
+ * @param {string} codeField - tên field chứa mã trạng thái (mặc định: 'statusCode')
+ * @returns {Array} danh sách vận đơn đã filter
+ */
+export function filterOrdersByLabels(orders, labels, codeField = 'statusCode') {
+  if (!labels || labels.length === 0) return orders
+
+  const labelArray = Array.isArray(labels) ? labels : [labels]
+  const allowedCodeSets = labelArray.map((label) => LABEL_TO_CODES_MAP[label]).filter(Boolean)
+
+  if (allowedCodeSets.length === 0) return []
+
+  return orders.filter((order) => {
+    const code = String(order[codeField])
+    return allowedCodeSets.some((codeSet) => codeSet.has(code))
+  })
+}
+
 export const ticketPropMap = (arr) => {
   let ret = []
   arr.map((item) => {
