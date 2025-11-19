@@ -84,6 +84,8 @@
   "notFoundOrders": "Không tìm thấy",
   "sender": "Người gửi",
   "emptySenderAddress": "Không có địa chỉ người gửi, vui lòng cài đặt địa chỉ người gửi",
+  "deleteAddressSuccess": "Xóa địa chỉ thành công",
+  "deleteAddressFailed": "Xóa địa chỉ thất bại",
 
   "_COMMENT_TABLE": "TABLE VIEW",
   "noData": "Không có dữ liệu",

@@ -26,7 +26,7 @@
         </SelectTrigger>
         <SelectContent>
           <SelectItem v-for="address in senderAddresses" :key="address.id" :value="address.address">
-            {{ `${senderName} - ${senderPhone} - ${address.address}` }}
+            {{ `${senderName} - ${senderPhone} - ${address?.address}` }}
           </SelectItem>
         </SelectContent>
       </Select>
@@ -176,9 +176,9 @@ const mapObjectKey = {
 const orderObject = () => {
   return {
     ORDER_NUMBER: '',
-    SENDER_FULLNAME: senderName.value,
-    SENDER_ADDRESS: selectedSenderAddress.value,
-    SENDER_PHONE: senderPhone.value,
+    SENDER_FULLNAME: senderName.value || '',
+    SENDER_ADDRESS: selectedSenderAddress.value || '',
+    SENDER_PHONE: senderPhone.value || '',
     RECEIVER_FULLNAME: '',
     RECEIVER_ADDRESS: '',
     RECEIVER_PHONE: '',

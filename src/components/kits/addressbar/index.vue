@@ -17,15 +17,22 @@
     <Button variant="ghost" v-if="!isEditing" @click="handleCopyAddress" :disabled="copyDisabled"
       ><Copy v-if="!isCoppied" /><CheckCheck v-else
     /></Button>
+    <Button class="text-red-500 hover:text-red-600" variant="ghost" v-if="!isEditing" @click="handleDeleteAddress"
+      ><Trash2 /></Button>
   </div>
 </template>
 
 <script setup>
 import { computed, ref, nextTick } from 'vue'
 import { Button } from '@/components/ui/button'
-import { Pencil, Copy, Check, CheckCheck, X } from 'lucide-vue-next'
+import { Pencil, Copy, Check, CheckCheck, X, Trash2 } from 'lucide-vue-next'
 import api from '@/api/axios'
 import { toast } from 'vue-sonner'
+import { useI18n } from 'vue-i18n'
+import { useAuthStore } from '@/stores/auth'
+
+const { t } = useI18n()
+const authStore = useAuthStore()
 
 const props = defineProps({
   address: {
@@ -33,6 +40,8 @@ const props = defineProps({
     required: true,
   },
 })
+
+const emit = defineEmits(['deleteAddress'])
 
 const address = ref(props.address)
 const isEditing = ref(false)
@@ -55,6 +64,25 @@ const handleUpdateAddress = async () => {
   } catch (error) {
     console.log(error)
     toast.error('Update address failed')
+  }
+}
+
+const handleDeleteAddress = async () => {
+  try {
+    const res = await api.delete('/customer/address', {
+      data: {
+        id: address.value.id,
+      },
+    })
+    if (res.data.success) {
+      toast.success(t('deleteAddressSuccess'))
+      authStore.setUserAddress(res.data.data)
+      address.value = res.data.data
+      emit('deleteAddress')
+    }
+  } catch (error) {
+    console.log(error)
+    toast.error(t('deleteAddressFailed'))
   }
 }
 

@@ -66,7 +66,7 @@
           </div>
         </div>
         <div v-for="address in addresses" :key="address.id">
-          <AddressBar :address="address" />
+          <AddressBar :address="address" @deleteAddress="deleteAddress" />
         </div>
       </div>
     </div>
@@ -234,6 +234,10 @@ const saveAddress = async () => {
     console.log(error)
     toast.error(error.response.data.message)
   }
+}
+
+const deleteAddress = () => {
+  addresses.value = useAuthStore().getUserAddress
 }
 
 onMounted(() => {
