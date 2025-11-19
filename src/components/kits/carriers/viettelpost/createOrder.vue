@@ -1050,6 +1050,7 @@ watch(
         await getServices()
       } catch (error) {
         console.log(error)
+        toast.error(error.response.data.message||'Lỗi khi load dịch vụ')
       }
     }
   },

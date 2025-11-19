@@ -35,7 +35,7 @@
             row.VERIFY_STATE === 'SUCCESS'
               ? 'text-blue-500 bg-blue-200 dark:bg-blue-900 dark:text-blue-400'
               : '',
-            row.VERIFY_STATE === 'FAILED'
+            row.VERIFY_STATE === 'FAILED' || row.VERIFY_STATE === 'CREATED_FAILURE'
               ? 'text-red-500 bg-red-200 dark:bg-red-900 dark:text-red-400'
               : '',
             row.VERIFY_STATE === 'CREATED'
@@ -51,7 +51,7 @@
             row.VERIFY_STATE === 'SUCCESS'
               ? 'text-blue-500 bg-blue-200 dark:bg-blue-900 dark:text-blue-400'
               : '',
-            row.VERIFY_STATE === 'FAILED'
+            row.VERIFY_STATE === 'FAILED' || row.VERIFY_STATE === 'CREATED_FAILURE'
               ? 'text-red-500 bg-red-200 dark:bg-red-900 dark:text-red-400'
               : '',
             row.VERIFY_STATE === 'CREATED'

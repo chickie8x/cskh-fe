@@ -344,6 +344,7 @@ const getOrderList = async () => {
     }
   } catch (error) {
     console.log(error)
+    toast.error(error.response.data.message || 'Lỗi khi lấy danh sách đơn hàng')
   }
 }
 
@@ -358,6 +359,7 @@ const getOrderSummary = async () => {
     }
   } catch (error) {
     console.log(error)
+    toast.error(error.response.data.message || 'Lỗi khi lấy thông tin tổng hợp')
   }
 }
 
@@ -372,6 +374,7 @@ const getAddresses = async () => {
       }
     } catch (error) {
       console.log(error)
+      toast.error(error.response.data.message || 'Lỗi khi lấy thông tin địa chỉ')
     }
   }
 }

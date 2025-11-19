@@ -287,8 +287,11 @@ const verifyOrders = async () => {
 
   results.forEach((result) => {
     if (result.status === 'fulfilled') {
-      const { res, index } = result.value
-
+      const { res,err,index } = result.value
+      if(err){
+        toast.error(err.response.data.message||'Lỗi khi xác minh đơn hàng')
+        return
+      }
       if (!res.data.data.error) {
         excelData.value[index]['VERIFY_STATE'] = 'SUCCESS'
         excelData.value[index]['TOTAL_MONEY'] = res.data.data.data.MONEY_TOTAL
@@ -296,6 +299,7 @@ const verifyOrders = async () => {
         orderData.value[index]['VERIFY_STATE'] = 'SUCCESS'
       } else {
         excelData.value[index]['VERIFY_STATE'] = 'FAILED'
+        toast.error(res.data.data.error)
       }
     } else {
       // rejected → error
@@ -316,8 +320,11 @@ const createOrders = async () => {
       return order
     }
   })
+  if(!orders.length){
+    toast.error('Không có đơn hàng hợp lệ')
+    return
+  }
   const tasks = orders.map((order, index) => {
-    console.log(order)
     return api
       .post('/connector/viettelpost/order/create-nlp', { data: order })
       .then((res) => ({ res, index }))
@@ -333,7 +340,8 @@ const createOrders = async () => {
         excelData.value[index]['VERIFY_STATE'] = 'CREATED'
       }
     } else {
-      console.log(result.reason)
+      excelData.value[index]['VERIFY_STATE'] = 'CREATED_FAILURE'
+      toast.error(result.reason)
     }
   })
 }
