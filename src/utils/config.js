@@ -132,7 +132,7 @@ export const BADGE_PRIORITY = [
 ]
 
 //SSE config
-export const SSE_URL = 'http://localhost:3000/api/sse/events'
+export const SSE_URL = 'http://14.225.1.34/api/sse/events'
 
 //Order config
 export const ORDER_TABLE_HEADER = [
