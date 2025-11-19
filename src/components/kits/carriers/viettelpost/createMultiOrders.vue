@@ -20,7 +20,7 @@
     </div>
     <div class="mt-4">
       <span class="text-sm font-semibold">{{ t('sender') }}</span>
-      <Select v-model="selectedSenderAddress">
+      <Select v-model="selectedSenderAddress" :disabled="!senderAddresses.length">
         <SelectTrigger>
           <SelectValue placeholder="Chọn địa chỉ" />
         </SelectTrigger>
@@ -30,6 +30,7 @@
           </SelectItem>
         </SelectContent>
       </Select>
+      <div v-if="!senderAddresses.length" class="flex items-center gap-1 text-red-500 text-sm py-2"><TriangleAlert class="size-4"/> {{ t('emptySenderAddress') }}</div>
     </div>
     <div v-if="excelData.length" class="mt-4">
       <div v-if="haveErrorOrders" class="flex items-center gap-2 text-orange-500 py-2 text-sm">
@@ -49,7 +50,7 @@ import { useI18n } from 'vue-i18n'
 import * as XLSX from 'xlsx'
 import ExcelTable from '@/components/kits/excel-table/index.vue'
 import { Button } from '@/components/ui/button'
-import { Plus, Download, ShieldAlert, ListChecks, FilePlus } from 'lucide-vue-next'
+import { Plus, Download, ShieldAlert, ListChecks, FilePlus, TriangleAlert } from 'lucide-vue-next'
 import api from '@/api/axios.js'
 import { useAuthStore } from '@/stores/auth'
 import { v4 as uuidv4 } from 'uuid'
@@ -60,6 +61,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { toast } from 'vue-sonner'
 
 const { t } = useI18n()
 const authStore = useAuthStore()
@@ -70,7 +72,7 @@ const orderData = ref([])
 const tbHeaders = ref([])
 const isVerify = ref(false)
 const senderAddresses = ref(authStore.userAddress || [])
-const selectedSenderAddress = ref(senderAddresses.value[0].address)
+const selectedSenderAddress = ref(senderAddresses.value[0]?.address || '')
 const senderName = ref(authStore.user?.name || '')
 const senderPhone = ref(authStore.user?.phone || '')
 const haveErrorOrders = computed(() => {

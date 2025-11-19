@@ -77,7 +77,7 @@
   "uploadExcel": "Chọn file",
   "createOrders": "Tạo đơn",
   "downloadExcel": "Tải file mẫu",
-  "orderVerifyWarning": "Lưu ý: Có đơn không hợp lệ, kiểm tra lại thông tin đơn hàng trong file excel, chọn giá trị hợp lệ và load lại file",
+  "orderVerifyWarning": "Lưu ý: Có đơn không hợp lệ, kiểm tra lại thông tin đơn hàng trong file excel, chọn giá trị hợp lệ và chọn lại file",
   "verifyOrder": "Xác minh đơn hàng",
   "totalQueryOrders": "Tổng số mã vận đơn tìm kiếm",
   "foundOrders": "Tìm thấy",
