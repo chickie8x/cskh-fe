@@ -231,7 +231,7 @@
           </div>
           <div>
             <span>{{ t('mainServices') }}</span>
-            <div class="flex justify-between gap-2 text-sm w-full mt-1">
+            <div class="grid grid-cols-3 gap-2 text-sm w-full mt-1">
               <div
                 v-for="service in orderServices"
                 :key="service.MA_DV_CHINH"
@@ -901,12 +901,7 @@ const getServices = async () => {
     const res = await api.post('/connector/viettelpost/prices-all', {
       data: getServiceObject.value,
     })
-    orderServices.value = res.data.data.filter(
-      (service) =>
-        service.MA_DV_CHINH === 'STK' ||
-        service.MA_DV_CHINH === 'SHT' ||
-        service.MA_DV_CHINH === 'SCN',
-    )
+    orderServices.value = res.data.data
     console.log(orderServices.value)
   } catch (error) {
     console.log(error)
