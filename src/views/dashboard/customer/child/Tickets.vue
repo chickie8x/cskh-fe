@@ -47,20 +47,34 @@
             </SelectItem>
           </SelectContent>
         </Select>
+        <Select v-model="ticketCarrier">
+          <SelectTrigger>
+            <SelectValue :placeholder="t('selectTicketCarrier')" class="w-48" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem
+              v-for="carrier in CARRIERS"
+              :key="carrier.value"
+              :value="carrier.value"
+            >
+              {{ carrier.label }}
+            </SelectItem>
+          </SelectContent>
+        </Select>
         <input
           type="text"
-          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive max-w-72"
+          class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
           :placeholder="t('enterTicketNote')"
           v-model="ticketNote"
         />
+      </div>
+      <div class="p-4 flex items-center justify-between gap-2">
         <input
           type="text"
           class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive flex-1"
           :placeholder="t('enterTrackingNumbers')"
           v-model="orderNumbers"
         />
-      </div>
-      <div class="p-4 flex items-center justify-end gap-2">
         <Button @click="createTicket" class="min-w-28" variant="default"
           ><CircleCheck class="size-4" />{{ t('createTicket') }}</Button
         >
@@ -166,6 +180,10 @@
             <span>Khách hàng</span>
             <span class="font-semibold">{{ selectedTicket.ticketUser.name }}</span>
           </div>
+          <div class="flex items-center justify-between p-4 border-b border-border">
+            <span>Đơn vị vận chuyển</span>
+            <span class="font-semibold">{{ selectedTicket.carrier }}</span>
+          </div>
           <div class="flex flex-col p-4 border-b border-border">
             <span>Vận đơn</span>
             <div class="flex flex-wrap gap-4">
@@ -211,7 +229,7 @@ import {
   SelectValue,
   SelectItem,
 } from '@/components/ui/select'
-import { TICKET_TABLE_HEADER, BADGE_STATUS, TICKET_CATEGORY, BADGE_PRIORITY } from '@/utils/config'
+import { TICKET_TABLE_HEADER, BADGE_STATUS, TICKET_CATEGORY, BADGE_PRIORITY, CARRIERS } from '@/utils/config'
 import api from '@/api/axios'
 import { formatDateTime } from '@/utils/format'
 import { toast } from 'vue-sonner'
@@ -222,6 +240,7 @@ const tickets = ref([])
 const selectedTicket = ref(null)
 const showCreateTicket = ref(false)
 const selectTicketCategory = ref(null)
+const ticketCarrier = ref(null)
 const searchTicketCategory = ref(null)
 const searchTicketStatus = ref(null)
 const orderNumbers = ref('')
@@ -266,6 +285,15 @@ const generalInfo = [
 ]
 
 const tableStyling = {
+  carrier: {
+    colName: 'carrier',
+    classFn: (col) => {
+      return ''
+    },
+    valueFn: (col) => {
+      return col.carrier
+    },
+  },
   category: {
     colName: 'category',
     classFn: (col) => {
@@ -344,6 +372,7 @@ const createTicket = async () => {
   try {
     const response = await api.post('/customer/ticket/create', {
       category: selectTicketCategory.value,
+      carrier: ticketCarrier.value,
       description: ticketNote.value,
       ticketItems: orderNumbers.value.trim().split(','),
     })

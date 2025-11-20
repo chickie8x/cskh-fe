@@ -171,6 +171,7 @@
   "errorFetchingOrders": "Lỗi khi tìm kiếm mã vận đơn",
   "selectTicketPriority": "Chọn mức độ ưu tiên",
   "selectTicketStatus": "Chọn trạng thái ticket",
+  "selectTicketCarrier": "Chọn đơn vị vận chuyển",
 
   "_COMMENT_SETTINGS": "SETTINGS VIEW",
   "addresses": "Địa chỉ",

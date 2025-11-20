@@ -31,6 +31,10 @@ export const DEFAULT_TICKET_STATUS = null
 export const DEFAULT_TICKET_PRIORITY = null
 export const TICKET_TABLE_HEADER = [
   {
+    key: 'carrier',
+    label: 'Carrier',
+  },
+  {
     key: 'category',
     label: 'Category',
   },
