@@ -299,12 +299,13 @@ const verifyOrders = async () => {
         orderData.value[index]['VERIFY_STATE'] = 'SUCCESS'
       } else {
         excelData.value[index]['VERIFY_STATE'] = 'FAILED'
-        toast.error(res.data.data.error)
+        toast.error(res.data.data.message || 'Đơn hàng không hợp lệ')
       }
     } else {
       // rejected → error
       const { err, index } = result.reason
       excelData.value[index]['VERIFY_STATE'] = 'FAILED'
+      toast.error(err.response.data.message || 'Lỗi khi xác minh đơn hàng')
     }
   })
   isVerify.value = true
@@ -341,7 +342,7 @@ const createOrders = async () => {
       }
     } else {
       excelData.value[index]['VERIFY_STATE'] = 'CREATED_FAILURE'
-      toast.error(result.reason)
+      toast.error(result.reason || 'Lỗi khi tạo đơn hàng')
     }
   })
 }
