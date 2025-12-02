@@ -17,8 +17,13 @@
     <Button variant="ghost" v-if="!isEditing" @click="handleCopyAddress" :disabled="copyDisabled"
       ><Copy v-if="!isCoppied" /><CheckCheck v-else
     /></Button>
-    <Button class="text-red-500 hover:text-red-600" variant="ghost" v-if="!isEditing" @click="handleDeleteAddress"
-      ><Trash2 /></Button>
+    <Button
+      class="text-red-500 hover:text-red-600"
+      variant="ghost"
+      v-if="!isEditing"
+      @click="handleDeleteAddress"
+      ><Trash2
+    /></Button>
   </div>
 </template>
 

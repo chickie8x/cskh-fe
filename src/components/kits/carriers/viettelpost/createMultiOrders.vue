@@ -30,7 +30,9 @@
           </SelectItem>
         </SelectContent>
       </Select>
-      <div v-if="!senderAddresses.length" class="flex items-center gap-1 text-red-500 text-sm py-2"><TriangleAlert class="size-4"/> {{ t('emptySenderAddress') }}</div>
+      <div v-if="!senderAddresses.length" class="flex items-center gap-1 text-red-500 text-sm py-2">
+        <TriangleAlert class="size-4" /> {{ t('emptySenderAddress') }}
+      </div>
     </div>
     <div v-if="excelData.length" class="mt-4">
       <div v-if="haveErrorOrders" class="flex items-center gap-2 text-orange-500 py-2 text-sm">
@@ -38,7 +40,7 @@
         <span>{{ t('orderVerifyWarning') }}</span>
       </div>
       <div class="overflow-x-auto">
-        <ExcelTable :tbHeaders="tbHeaders" :data="excelData" />
+        <ExcelTable :tbHeaders="tbHeaders" :data="excelData" @updateService="updateService" />
       </div>
     </div>
   </div>
@@ -144,7 +146,7 @@ function onFileChange(e) {
     if (rows.length) {
       Object.keys(rows[0]).map((item) => {
         if (item !== 'VERIFY_ID') {
-          tbHeaders.value.push({ key: item.trim(), label: item.trim() })
+          tbHeaders.value.push({ key: mapObjectKey[item.trim()], label: item.trim() })
         }
       })
     }
@@ -165,8 +167,8 @@ const mapObjectKey = {
   'Tiền thu hộ COD (VND)': 'MONEY_COLLECTION',
   'Loại hàng hóa (*)': 'PRODUCT_TYPE',
   'Tính chất hàng hóa đặc biệt': 'PRODUCT_DESCRIPTION',
-  'Dịch vụ  (*)': 'ORDER_SERVICE',
-  'Dịch vụ cộng thêm': 'ORDER_SERVICE_ADD',
+  // 'Dịch vụ  (*)': 'ORDER_SERVICE',
+  // 'Dịch vụ cộng thêm': 'ORDER_SERVICE_ADD',
   'Thu tiền xem hàng': 'ORDER_VOUCHER',
   'Dài (cm)': 'PRODUCT_LENGTH',
   'Rộng (cm)': 'PRODUCT_WIDTH',
@@ -207,12 +209,15 @@ const orderObject = () => {
     MONEY_FEEOTHER: 0,
     MONEY_TOTALVAT: 0,
     MONEY_TOTAL: 0,
-    LIST_ITEM: [],
+    PRODUCT_DETAIL: [],
   }
 }
 
 const orderObjectMapper = (row) => {
   const ret = orderObject()
+  ret['ORDER_SERVICE'] = row.ORDER_SERVICE || ''
+  ret['AVAILABLE_SERVICES'] = row.AVAILABLE_SERVICES || []
+  ret['MONEY_TOTAL'] = row.MONEY_TOTAL || 0
   Object.keys(mapObjectKey).forEach((key) => {
     ret[mapObjectKey[key]] = row[key]
     ret['VERIFY_ID'] = row['VERIFY_ID']
@@ -247,11 +252,6 @@ const orderObjectMapper = (row) => {
       ret['ORDER_PAYMENT'] = 4
     }
 
-    //determine order service
-    if (key === 'ORDER_SERVICE') {
-      ret['ORDER_SERVICE'] = ret['ORDER_SERVICE'].split(' ')[0] || 'VCN'
-    }
-
     //determine product type
     if (key === 'PRODUCT_TYPE') {
       ret['PRODUCT_TYPE'] = ret['PRODUCT_TYPE'] === 'Tài liệu' ? 'TL' : 'HH'
@@ -278,7 +278,7 @@ const orderDataBuild = () => {
 const verifyOrders = async () => {
   const tasks = orderData.value.map((order, index) => {
     return api
-      .post('/connector/viettelpost/price-nlp', { data: order })
+      .post('/connector/viettelpost/price-all-nlp', { data: order })
       .then((res) => ({ res, index }))
       .catch((err) => ({ err, index }))
   })
@@ -287,25 +287,23 @@ const verifyOrders = async () => {
 
   results.forEach((result) => {
     if (result.status === 'fulfilled') {
-      const { res,err,index } = result.value
-      if(err){
-        toast.error(err.response.data.message||'Lỗi khi xác minh đơn hàng')
+      const { res, err, index } = result.value
+      if (err) {
+        toast.error(err.response.data.message || 'Lỗi khi xác minh đơn hàng')
+        excelData.value[index]['VERIFY_STATE'] = 'VERIFIED_FAILURE'
         return
       }
-      if (!res.data.data.error) {
-        excelData.value[index]['VERIFY_STATE'] = 'SUCCESS'
-        excelData.value[index]['TOTAL_MONEY'] = res.data.data.data.MONEY_TOTAL
-        orderData.value[index] = { ...orderData.value[index], ...res.data.data.data }
-        orderData.value[index]['VERIFY_STATE'] = 'SUCCESS'
+      if (res.data.success) {
+        excelData.value[index]['VERIFY_STATE'] = 'VERIFIED'
+        orderData.value[index]['VERIFY_STATE'] = 'VERIFIED'
+        excelData.value[index]['AVAILABLE_SERVICES'] = res.data.data.RESULT
       } else {
-        excelData.value[index]['VERIFY_STATE'] = 'FAILED'
-        toast.error(res.data.data.message || 'Đơn hàng không hợp lệ')
+        excelData.value[index]['VERIFY_STATE'] = 'VERIFIED_FAILURE'
       }
     } else {
       // rejected → error
       const { err, index } = result.reason
-      excelData.value[index]['VERIFY_STATE'] = 'FAILED'
-      toast.error(err.response.data.message || 'Lỗi khi xác minh đơn hàng')
+      excelData.value[index]['VERIFY_STATE'] = 'VERIFIED_FAILURE'
     }
   })
   isVerify.value = true
@@ -316,16 +314,8 @@ const createOrders = async () => {
     toast.error(t('emptySenderAddress'))
     return
   }
-  const orders = orderData.value.filter((order) => {
-    if (order.VERIFY_STATE === 'SUCCESS') {
-      return order
-    }
-  })
-  if(!orders.length){
-    toast.error('Không có đơn hàng hợp lệ')
-    return
-  }
-  const tasks = orders.map((order, index) => {
+
+  const tasks = orderData.value.map((order, index) => {
     return api
       .post('/connector/viettelpost/order/create-nlp', { data: order })
       .then((res) => ({ res, index }))
@@ -336,20 +326,40 @@ const createOrders = async () => {
 
   results.forEach((result) => {
     if (result.status === 'fulfilled') {
-      const { res, index } = result.value
+      const { res, err, index } = result.value
+      if (err) {
+        toast.error(err.response.data.message || 'Lỗi khi tạo đơn hàng')
+        excelData.value[index]['VERIFY_STATE'] = 'CREATED_FAILURE'
+        return
+      }
       if (res.data.success) {
         excelData.value[index]['VERIFY_STATE'] = 'CREATED'
+      } else {
+        excelData.value[index]['VERIFY_STATE'] = 'CREATED_FAILURE'
       }
     } else {
       excelData.value[index]['VERIFY_STATE'] = 'CREATED_FAILURE'
-      toast.error(result.reason || 'Lỗi khi tạo đơn hàng')
     }
   })
 }
 
-watch(excelData, () => {
-  if (excelData.value.length) {
-    orderDataBuild()
-  }
-})
+const updateService = (idx, service) => {
+  const row = excelData.value[idx]
+  row['ORDER_SERVICE'] = service
+  row['MONEY_TOTAL'] = row['AVAILABLE_SERVICES'].find(
+    (item) => item.MA_DV_CHINH === service,
+  ).GIA_CUOC
+  excelData.value[idx] = row
+  // excelData.value = [...excelData.value]
+}
+
+watch(
+  excelData,
+  () => {
+    if (excelData.value.length) {
+      orderDataBuild()
+    }
+  },
+  { deep: true },
+)
 </script>

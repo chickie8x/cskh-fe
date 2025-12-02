@@ -17,6 +17,12 @@
   "loadingAddressFailed": "Lỗi khi tải danh sách địa chỉ. ",
   "tryAgain": "Thử lại",
   "verifyAddressFailedMes": "Lỗi khi tra cứu địa chỉ. ",
+  "verifyAddress": "Xác minh địa chỉ",
+  "singleAddress": "Địa chỉ đơn lẻ",
+  "multipleAddress": "Địa chỉ hàng loạt",
+  "originalAddress": "Địa chỉ cần xác minh",
+  "verifiedAddress": "Địa chỉ đã xác minh",
+  "STT": "STT",
 
   "_COMMENT_SHIPMENTS": "SHIPMENTS VIEW",
   "createOrder": "Tạo đơn hàng",
@@ -172,6 +178,9 @@
   "selectTicketPriority": "Chọn mức độ ưu tiên",
   "selectTicketStatus": "Chọn trạng thái ticket",
   "selectTicketCarrier": "Chọn đơn vị vận chuyển",
+  "ticketAttachedments": "Đính kèm",
+  "ticketImages": "Hình ảnh",
+  "ticketFiles": "Tệp tin",
 
   "_COMMENT_SETTINGS": "SETTINGS VIEW",
   "addresses": "Địa chỉ",
@@ -189,5 +198,6 @@
 
   "_COMMENT_EXCEL_TABLE": "EXCEL TABLE VIEW",
   "colState": "Trạng thái",
-  "colTotalMoney": "Tổng cước"
+  "colTotalMoney": "Tổng cước",
+  "colService": "Dịch vụ"
 }

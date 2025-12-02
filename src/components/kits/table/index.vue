@@ -22,7 +22,7 @@
           <TableCell
             v-for="header in tbHeader"
             :key="header.key"
-            class="text-gray-600 dark:text-gray-400 px-4 py-2"
+            class="text-gray-600 dark:text-gray-400 px-4 py-2 max-w-[200px] break-words whitespace-normal"
           >
             <span
               @click="

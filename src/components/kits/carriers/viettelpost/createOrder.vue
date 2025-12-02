@@ -13,102 +13,27 @@
             <User class="w-5 h-5 text-indigo-500" />
             <span class="font-medium">{{ t('senderTitle') }}</span>
           </div>
-          <div class="grid grid-cols-2 gap-6 mt-4">
-            <div class="flex flex-col gap-1">
-              <Label for="name">{{ t('senderName') }} <span class="text-red-500">*</span></Label>
-              <Input
-                v-model="orderObject.SENDER_FULLNAME"
-                type="text"
-                class="border-transparent bg-muted"
-                :class="{ 'border-red-500': senderNameFlag }"
-                @input="senderNameFlag = false"
-              />
-            </div>
-            <div class="flex flex-col gap-1">
-              <Label for="phone">{{ t('senderPhone') }} <span class="text-red-500">*</span></Label>
-              <Input
-                v-model="orderObject.SENDER_PHONE"
-                type="text"
-                class="border-transparent bg-muted"
-                :class="{ 'border-red-500': senderPhoneFlag }"
-                @input="senderPhoneFlag = false"
-              />
-            </div>
-            <div>
-              <Label for="province"
-                >{{ t('selectProvincePlaceHolder') }} <span class="text-red-500">*</span></Label
-              >
-
-              <Select v-model="orderObject.SENDER_PROVINCE">
-                <SelectTrigger
-                  class="border-transparent w-full bg-muted"
-                  :class="{ 'border-red-500': senderProvinceFlag }"
+          <div class="mt-4">
+            <span class="text-sm font-semibold">{{ t('sender') }}</span>
+            <Select v-model="selectedSenderAddress" :disabled="!senderAddresses.length">
+              <SelectTrigger>
+                <SelectValue placeholder="Chọn địa chỉ" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem
+                  v-for="address in senderAddresses"
+                  :key="address.id"
+                  :value="address.address"
                 >
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent class="border-transparent">
-                  <SelectItem
-                    v-for="province in provinces"
-                    :key="province.PROVINCE_ID"
-                    :value="province.PROVINCE_ID"
-                    >{{ province.PROVINCE_NAME }}</SelectItem
-                  >
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label for="district"
-                >{{ t('selectDistrictPlaceHolder') }} <span class="text-red-500">*</span></Label
-              >
-              <Select v-model="orderObject.SENDER_DISTRICT">
-                <SelectTrigger
-                  class="border-transparent w-full bg-muted"
-                  :class="{ 'border-red-500': senderDistrictFlag }"
-                >
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent class="border-transparent">
-                  <SelectItem
-                    v-for="district in senderDistricts"
-                    :key="district.DISTRICT_ID"
-                    :value="district.DISTRICT_ID"
-                    >{{ district.DISTRICT_NAME }}</SelectItem
-                  >
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label for="ward"
-                >{{ t('selectWardPlaceHolder') }} <span class="text-red-500">*</span></Label
-              >
-              <Select v-model="orderObject.SENDER_WARD">
-                <SelectTrigger
-                  class="border-transparent w-full bg-muted"
-                  :class="{ 'border-red-500': senderWardFlag }"
-                >
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent class="border-transparent">
-                  <SelectItem
-                    v-for="ward in senderWards"
-                    :key="ward.WARDS_ID"
-                    :value="ward.WARDS_ID"
-                    >{{ ward.WARDS_NAME }}</SelectItem
-                  >
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label for="street"
-                >{{ t('selectStreetOrSubWard') }} <span class="text-red-500">*</span></Label
-              >
-              <Input
-                v-model="orderObject.SENDER_ADDRESS"
-                class="w-full border-transparent bg-muted"
-                :class="{ 'border-red-500': senderAddressFlag }"
-                type="text"
-                @input="senderAddressFlag = false"
-              />
+                  {{ `${senderName} - ${senderPhone} - ${address?.address}` }}
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <div
+              v-if="!senderAddresses.length"
+              class="flex items-center gap-1 text-red-500 text-sm py-2"
+            >
+              <TriangleAlert class="size-4" /> {{ t('emptySenderAddress') }}
             </div>
           </div>
         </div>
@@ -147,7 +72,7 @@
                 >{{ t('selectProvincePlaceHolder') }} <span class="text-red-500">*</span></Label
               >
 
-              <Select v-model="orderObject.RECEIVER_PROVINCE">
+              <Select v-model="receiverProvince">
                 <SelectTrigger
                   class="border-transparent w-full bg-muted"
                   :class="{ 'border-red-500': receiverProvinceFlag }"
@@ -158,7 +83,7 @@
                   <SelectItem
                     v-for="province in provinces"
                     :key="province.PROVINCE_ID"
-                    :value="province.PROVINCE_ID"
+                    :value="province.PROVINCE_NAME"
                     >{{ province.PROVINCE_NAME }}</SelectItem
                   >
                 </SelectContent>
@@ -168,7 +93,7 @@
               <Label for="district"
                 >{{ t('selectDistrictPlaceHolder') }} <span class="text-red-500">*</span></Label
               >
-              <Select v-model="orderObject.RECEIVER_DISTRICT">
+              <Select v-model="receiverDistrict">
                 <SelectTrigger
                   class="border-transparent w-full bg-muted"
                   :class="{ 'border-red-500': receiverDistrictFlag }"
@@ -179,7 +104,7 @@
                   <SelectItem
                     v-for="district in receiverDistricts"
                     :key="district.DISTRICT_ID"
-                    :value="district.DISTRICT_ID"
+                    :value="district.DISTRICT_NAME"
                     >{{ district.DISTRICT_NAME }}</SelectItem
                   >
                 </SelectContent>
@@ -189,7 +114,7 @@
               <Label for="ward"
                 >{{ t('selectWardPlaceHolder') }} <span class="text-red-500">*</span></Label
               >
-              <Select v-model="orderObject.RECEIVER_WARD">
+              <Select v-model="receiverWard">
                 <SelectTrigger
                   class="border-transparent w-full bg-muted"
                   :class="{ 'border border-red-500': receiverWardFlag }"
@@ -200,7 +125,7 @@
                   <SelectItem
                     v-for="ward in receiverWards"
                     :key="ward.WARDS_ID"
-                    :value="ward.WARDS_ID"
+                    :value="ward.WARDS_NAME"
                     >{{ ward.WARDS_NAME }}</SelectItem
                   >
                 </SelectContent>
@@ -211,7 +136,7 @@
                 >{{ t('selectStreetOrSubWard') }} <span class="text-red-500">*</span></Label
               >
               <Input
-                v-model="orderObject.RECEIVER_ADDRESS"
+                v-model="receiverStreet"
                 class="w-full border-transparent bg-muted"
                 type="text"
                 :class="{ 'border-red-500': receiverAddressFlag }"
@@ -248,9 +173,20 @@
               </div>
             </div>
           </div>
-          <div class="flex items-center gap-2 text-sm">
-            <span class="font-medium">{{ t('expectTimeDelivery') }}</span>
-            <span class="font-bold">{{ orderService?.THOI_GIAN }}</span>
+          <div
+            class="flex flex-col gap-2 text-sm mt-4 border-t pt-2 border-border"
+            v-if="orderService"
+          >
+            <div class="flex items-center">
+              <Clock class="w-4 h-4 text-indigo-500 mr-1" />
+              <span>{{ t('expectTimeDelivery') }}:</span>
+              <span class="font-bold block ml-2">{{ orderService?.THOI_GIAN }}</span>
+            </div>
+            <div class="flex items-center">
+              <DollarSign class="w-4 h-4 text-indigo-500 mr-1" />
+              <span>{{ t('totalOrderFee') }}:</span>
+              <span class="font-bold block ml-2">{{ formatCurrency(orderService?.GIA_CUOC) }}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -456,7 +392,6 @@
                     class="w-4 h-4 cursor-pointer"
                     :id="paymentPerson.name"
                     name="codPaymentPerson"
-                    :disabled="!isCod"
                   />
                   <Label class="cursor-pointer" :for="paymentPerson.name">{{
                     t(paymentPerson.label)
@@ -528,6 +463,9 @@ import {
   Send,
   SquarePen,
   RefreshCw,
+  TriangleAlert,
+  Clock,
+  DollarSign,
 } from 'lucide-vue-next'
 import { Input } from '@/components/ui/input'
 import {
@@ -544,8 +482,15 @@ import { onMounted, ref, watch, computed } from 'vue'
 import api from '@/api/axios'
 import { formatCurrency, formatNumber } from '@/utils/format'
 import { toast } from 'vue-sonner'
+import { useAuthStore } from '@/stores/auth'
+import { watchDebounced } from '@vueuse/core'
 
+const authStore = useAuthStore()
 const { t } = useI18n()
+const senderAddresses = ref(authStore.userAddress || [])
+const selectedSenderAddress = ref(senderAddresses.value[0]?.address || '')
+const senderName = ref(authStore.user?.name || '')
+const senderPhone = ref(authStore.user?.phone || '')
 
 const onlyNumbers = (event) => {
   const input = event.target
@@ -622,12 +567,6 @@ const orderPaymentPeople = [
 ]
 
 //fields required flags
-const senderNameFlag = ref(false)
-const senderPhoneFlag = ref(false)
-const senderAddressFlag = ref(false)
-const senderDistrictFlag = ref(false)
-const senderWardFlag = ref(false)
-const senderProvinceFlag = ref(false)
 const receiverNameFlag = ref(false)
 const receiverPhoneFlag = ref(false)
 const receiverAddressFlag = ref(false)
@@ -637,33 +576,7 @@ const receiverProvinceFlag = ref(false)
 
 //check fields required
 const checkRequiredFields = () => {
-  if (orderObject.value.SENDER_FULLNAME === '') {
-    senderNameFlag.value = true
-    toast.error(t('requiredFieldsMissing'))
-    return false
-  }
-  if (orderObject.value.SENDER_PHONE === '') {
-    senderPhoneFlag.value = true
-    toast.error(t('requiredFieldsMissing'))
-    return false
-  }
-  if (orderObject.value.SENDER_ADDRESS === '') {
-    senderAddressFlag.value = true
-    toast.error(t('requiredFieldsMissing'))
-    return false
-  }
-  if (orderObject.value.SENDER_DISTRICT === '') {
-    senderDistrictFlag.value = true
-    toast.error(t('requiredFieldsMissing'))
-    return false
-  }
-  if (orderObject.value.SENDER_WARD === '') {
-    senderWardFlag.value = true
-    toast.error(t('requiredFieldsMissing'))
-    return false
-  }
-  if (orderObject.value.SENDER_PROVINCE === '') {
-    senderProvinceFlag.value = true
+  if (!selectedSenderAddress.value) {
     toast.error(t('requiredFieldsMissing'))
     return false
   }
@@ -704,10 +617,13 @@ const checkRequiredFields = () => {
 const orderServices = ref([])
 const orderService = ref(null)
 const provinces = ref([])
-const senderDistricts = ref([])
+const receiverProvince = ref(null)
 const receiverDistricts = ref([])
-const senderWards = ref([])
+const receiverDistrict = ref(null)
 const receiverWards = ref([])
+const receiverWard = ref(null)
+const receiverStreet = ref('')
+const receiverAddress = ref('')
 const oderNote = ref('')
 const productType = ref(productTypes[0].value)
 const productWidth = ref(0)
@@ -736,7 +652,7 @@ const orderPaymentCode = computed(() => {
   if (isCod.value) {
     return orderPaymentPerson.value === 'sender' ? 3 : 2
   } else {
-    return orderPaymentPerson.value === 'sender' ? 1 : 1
+    return orderPaymentPerson.value === 'sender' ? 1 : 4
   }
 })
 
@@ -768,29 +684,13 @@ const productInfo = computed(() => {
 
 const orderObject = ref({
   ORDER_NUMBER: '',
-  GROUPADDRESS_ID: 0,
-  CUS_ID: 0,
-  DELIVERY_DATE: '',
-  SENDER_FULLNAME: '',
-  SENDER_ADDRESS: '',
-  SENDER_PHONE: '',
-  SENDER_EMAIL: '',
-  SENDER_WARD: 0,
-  SENDER_DISTRICT: 0,
-  SENDER_PROVINCE: 0,
-  SENDER_LATITUDE: 0,
-  SENDER_LONGITUDE: 0,
+  SENDER_FULLNAME: senderName.value,
+  SENDER_ADDRESS: selectedSenderAddress.value,
+  SENDER_PHONE: senderPhone.value,
   RECEIVER_FULLNAME: '',
   RECEIVER_ADDRESS: '',
   RECEIVER_PHONE: '',
-  RECEIVER_EMAIL: '',
-  RECEIVER_WARD: 0,
-  RECEIVER_DISTRICT: 0,
-  RECEIVER_PROVINCE: 0,
-  RECEIVER_LATITUDE: 0,
-  RECEIVER_LONGITUDE: 0,
   PRODUCT_NAME: '',
-  PRODUCT_DESCRIPTION: '',
   PRODUCT_QUANTITY: 1,
   PRODUCT_PRICE: 0,
   PRODUCT_WEIGHT: 0,
@@ -800,31 +700,25 @@ const orderObject = ref({
   PRODUCT_TYPE: productType.value,
   ORDER_PAYMENT: orderPaymentCode.value,
   ORDER_SERVICE: orderService.value,
-  ORDER_SERVICE_ADD: '',
-  ORDER_VOUCHER: '',
+  ORDER_SERVICE_ADD: null,
   ORDER_NOTE: '',
   MONEY_COLLECTION: moneyCollection.value,
-  MONEY_TOTALFEE: 0,
-  MONEY_FEECOD: 0,
-  MONEY_FEEVAS: 0,
   MONEY_FEEINSURRANCE: 0,
-  MONEY_FEE: 0,
-  MONEY_FEEOTHER: 0,
-  MONEY_TOTALVAT: 0,
   MONEY_TOTAL: 0,
-  LIST_ITEM: productList.value,
+  PRODUCT_DETAIL: productList.value,
 })
 
 const getServiceObject = ref({
-  SENDER_PROVINCE: orderObject.value.SENDER_PROVINCE,
-  SENDER_DISTRICT: orderObject.value.SENDER_DISTRICT,
-  RECEIVER_PROVINCE: orderObject.value.RECEIVER_PROVINCE,
-  RECEIVER_DISTRICT: orderObject.value.RECEIVER_DISTRICT,
+  SENDER_ADDRESS: selectedSenderAddress.value,
+  RECEIVER_ADDRESS: receiverAddress.value,
   PRODUCT_TYPE: orderObject.value.PRODUCT_TYPE,
   PRODUCT_WEIGHT: orderObject.value.PRODUCT_WEIGHT,
   PRODUCT_PRICE: orderObject.value.PRODUCT_PRICE,
   MONEY_COLLECTION: orderObject.value.MONEY_COLLECTION,
-  TYPE: orderObject.value.TYPE,
+  PRODUCT_HEIGHT: orderObject.value.PRODUCT_HEIGHT,
+  PRODUCT_WIDTH: orderObject.value.PRODUCT_WIDTH,
+  PRODUCT_LENGTH: orderObject.value.PRODUCT_LENGTH,
+  TYPE: orderObject.value.TYPE || 1,
 })
 
 let attemptProvinces = 0
@@ -848,21 +742,17 @@ const getProvinces = async () => {
 }
 
 let attemptDistricts = 0
-const getDistricts = async (provinceId, target) => {
+const getDistricts = async (provinceId) => {
   const maxTry = 5
   const delay = 1000
   try {
     const res = await api.get('/connector/viettelpost/districts', { params: { provinceId } })
-    if (target === 'sender') {
-      senderDistricts.value = res.data.data.data
-    } else {
-      receiverDistricts.value = res.data.data.data
-    }
+    receiverDistricts.value = res.data.data.data
   } catch (error) {
     console.log(error)
     if (attemptDistricts < maxTry) {
       attemptDistricts++
-      setTimeout(() => getDistricts(provinceId, target), delay)
+      setTimeout(() => getDistricts(provinceId), delay)
     } else {
       toast.error('Failed to fetch districts')
       attemptDistricts = 0
@@ -871,21 +761,17 @@ const getDistricts = async (provinceId, target) => {
 }
 
 let attemptWards = 0
-const getWards = async (districtId, target) => {
+const getWards = async (districtId) => {
   const maxTry = 5
   const delay = 1000
   try {
     const res = await api.get('/connector/viettelpost/wards', { params: { districtId } })
-    if (target === 'sender') {
-      senderWards.value = res.data.data.data
-    } else {
-      receiverWards.value = res.data.data.data
-    }
+    receiverWards.value = res.data.data.data
   } catch (error) {
     console.log(error)
     if (attemptWards < maxTry) {
       attemptWards++
-      setTimeout(() => getWards(districtId, target), delay)
+      setTimeout(() => getWards(districtId), delay)
     } else {
       toast.error('Failed to fetch wards')
       attemptWards = 0
@@ -898,10 +784,12 @@ const getServices = async () => {
   const maxTry = 5
   const delay = 1000
   try {
-    const res = await api.post('/connector/viettelpost/prices-all', {
+    const res = await api.post('/connector/viettelpost/price-all-nlp', {
       data: getServiceObject.value,
     })
-    orderServices.value = res.data.data
+    if (!res.data.data.error) {
+      orderServices.value = res.data.data.RESULT
+    }
     console.log(orderServices.value)
   } catch (error) {
     console.log(error)
@@ -935,6 +823,30 @@ const createOrder = async () => {
   }
 }
 
+const checkgetServices = () => {
+  if (
+    !receiverProvince.value ||
+    !receiverDistrict.value ||
+    !receiverWard.value ||
+    !receiverStreet.value
+  )
+    return
+  receiverAddress.value = `${receiverStreet.value}, ${receiverWard.value}, ${receiverDistrict.value}, ${receiverProvince.value}`
+  orderObject.value.RECEIVER_ADDRESS = receiverAddress.value
+  getServiceObject.value.RECEIVER_ADDRESS = receiverAddress.value
+  getServiceObject.value.PRODUCT_TYPE = productType.value
+  getServiceObject.value.PRODUCT_WEIGHT = productInfo.value.totalProductWeight
+  getServiceObject.value.PRODUCT_PRICE = productInfo.value.totalProductPrice
+  const fields = ['SENDER_ADDRESS', 'RECEIVER_ADDRESS', 'PRODUCT_TYPE', 'PRODUCT_WEIGHT']
+  const isAllFilled = fields.every((field) => getServiceObject.value[field])
+  if (isAllFilled) {
+    getServices()
+  } else {
+    console.log('not all filled')
+    return
+  }
+}
+
 watch(isCod, () => {
   orderPaymentPerson.value = 'sender'
 })
@@ -943,11 +855,16 @@ watch(oderNote, () => {
   orderObject.value.ORDER_NOTE = oderNote.value
 })
 
-watch(productInfo, () => {
-  orderObject.value.PRODUCT_PRICE = productInfo.value.totalProductPrice
-  orderObject.value.PRODUCT_WEIGHT = productInfo.value.totalProductWeight
-  orderObject.value.PRODUCT_NAME = productInfo.value.totalProducts
-})
+watchDebounced(
+  productInfo,
+  () => {
+    orderObject.value.PRODUCT_PRICE = productInfo.value.totalProductPrice
+    orderObject.value.PRODUCT_WEIGHT = productInfo.value.totalProductWeight
+    orderObject.value.PRODUCT_NAME = productInfo.value.totalProducts
+    checkgetServices()
+  },
+  { debounce: 500, maxWait: 1000 },
+)
 
 watch(moneyCollection, () => {
   orderObject.value.MONEY_COLLECTION = moneyCollection.value
@@ -974,39 +891,40 @@ watch(orderServices, () => {
 })
 
 watch(orderService, () => {
-  orderObject.value.ORDER_SERVICE = orderService.value.MA_DV_CHINH
+  orderObject.value.ORDER_SERVICE = orderService.value.MA_DV_CHINH || ''
 })
 
 watch(
-  () => orderObject.value.SENDER_PROVINCE,
+  () => receiverProvince.value,
   (newVal, oldVal) => {
-    getDistricts(newVal, 'sender')
+    const provinceId = provinces.value.find((item) => item.PROVINCE_NAME === newVal)?.PROVINCE_ID
+    getDistricts(provinceId)
+    checkgetServices()
   },
 )
 
 watch(
-  () => orderObject.value.SENDER_DISTRICT,
+  () => receiverDistrict.value,
   (newVal, oldVal) => {
-    getWards(newVal, 'sender')
+    const districtId = receiverDistricts.value.find(
+      (item) => item.DISTRICT_NAME === newVal,
+    )?.DISTRICT_ID
+    getWards(districtId)
+    checkgetServices()
   },
 )
 
-watch(
-  () => orderObject.value.RECEIVER_PROVINCE,
-  (newVal, oldVal) => {
-    getDistricts(newVal, 'receiver')
-  },
-)
+watch(receiverWard, () => {
+  checkgetServices()
+})
 
-watch(
-  () => orderObject.value.RECEIVER_DISTRICT,
-  (newVal, oldVal) => {
-    getWards(newVal, 'receiver')
-  },
-)
+watch(receiverStreet, () => {
+  checkgetServices()
+})
 
 watch(productType, () => {
   orderObject.value.PRODUCT_TYPE = productType.value
+  checkgetServices()
 })
 
 watch(orderPaymentCode, () => {
@@ -1014,41 +932,11 @@ watch(orderPaymentCode, () => {
 })
 
 watch(
-  () => [
-    orderObject.value.SENDER_PROVINCE,
-    orderObject.value.SENDER_DISTRICT,
-    orderObject.value.RECEIVER_PROVINCE,
-    orderObject.value.RECEIVER_DISTRICT,
-    orderObject.value.PRODUCT_TYPE,
-    orderObject.value.PRODUCT_WEIGHT,
-    orderObject.value.PRODUCT_PRICE,
-  ],
-  async () => {
-    if (
-      orderObject.value.SENDER_PROVINCE &&
-      orderObject.value.SENDER_DISTRICT &&
-      orderObject.value.RECEIVER_PROVINCE &&
-      orderObject.value.RECEIVER_DISTRICT &&
-      orderObject.value.PRODUCT_TYPE &&
-      orderObject.value.PRODUCT_WEIGHT
-    ) {
-      getServiceObject.value = {
-        SENDER_PROVINCE: orderObject.value.SENDER_PROVINCE,
-        SENDER_DISTRICT: orderObject.value.SENDER_DISTRICT,
-        RECEIVER_PROVINCE: orderObject.value.RECEIVER_PROVINCE,
-        RECEIVER_DISTRICT: orderObject.value.RECEIVER_DISTRICT,
-        PRODUCT_TYPE: orderObject.value.PRODUCT_TYPE,
-        PRODUCT_WEIGHT: orderObject.value.PRODUCT_WEIGHT,
-      }
-      console.log(getServiceObject.value)
-      try {
-        await getServices()
-      } catch (error) {
-        console.log(error)
-        toast.error(error.response.data.message||'Lỗi khi load dịch vụ')
-      }
-    }
+  orderObject.value,
+  () => {
+    // console.log(orderObject.value)
   },
+  { deep: true },
 )
 
 onMounted(async () => {
